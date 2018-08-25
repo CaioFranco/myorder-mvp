@@ -1,0 +1,7 @@
+{
+  "name": "myorder-mvp",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}
