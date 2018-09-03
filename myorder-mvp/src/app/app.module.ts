@@ -6,20 +6,25 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { BuildOrderPage } from '../pages/build-order/build-order';
+import { DragulaModule } from 'ng2-dragula';
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+    HomePage,
+    BuildOrderPage
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    DragulaModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    HomePage,
+    BuildOrderPage
   ],
   providers: [
     StatusBar,

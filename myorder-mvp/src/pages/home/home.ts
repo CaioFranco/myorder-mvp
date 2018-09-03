@@ -1,3 +1,4 @@
+import { BuildOrderPage } from './../build-order/build-order';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
@@ -11,4 +12,7 @@ export class HomePage {
 
   }
 
+  goBuildOrder(){
+    this.navCtrl.push(BuildOrderPage);
+  }
 }
