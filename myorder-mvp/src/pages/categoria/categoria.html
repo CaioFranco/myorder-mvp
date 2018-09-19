@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Categorias</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row>
+      <!-- <div class="group-row"> -->
+        <ion-col col-4>
+          <div class="center-div">
+            <img class="circle-pic" [src]="pizzaImg" (click)="showProdutos(1)">
+          </div>
+        </ion-col>
+        <ion-col col-4>
+          <div class="center-div" >
+            <img class="circle-pic" [src]="refriImg" (click)="showProdutos(2)">
+          </div>
+        </ion-col>
+        <ion-col col-4>
+          <div class="center-div" >
+            <img class="circle-pic" [src]="sobremesaImg" (click)="showProdutos(3)">
+          </div>
+        </ion-col>
+      <!-- </div> -->
+    </ion-row>
+  </ion-grid>
+</ion-content>

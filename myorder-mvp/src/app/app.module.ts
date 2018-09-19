@@ -11,9 +11,7 @@ import { DragulaModule } from 'ng2-dragula';
 
 @NgModule({
   declarations: [
-    MyApp,
-    HomePage,
-    BuildOrderPage
+    MyApp
   ],
   imports: [
     BrowserModule,
@@ -22,9 +20,7 @@ import { DragulaModule } from 'ng2-dragula';
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp,
-    HomePage,
-    BuildOrderPage
+    MyApp
   ],
   providers: [
     StatusBar,

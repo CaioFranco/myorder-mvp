@@ -46,6 +46,62 @@
 }
 
 ion-content {
-    background: url("../assets/imgs/background.jpg") no-repeat fixed center;
+    background: url("../assets/imgs/background2.jpeg") no-repeat fixed center;
     background-size: cover;
 }
+
+//  h2 {
+//      font-size: 2rem;
+//  }  
+
+//  ion-item{
+//      background: color($colors, light);
+//  }
+
+//  ion-label{
+//      font-size: 1.8rem;
+//  }
+
+//  ion-title{
+//      text-align: center;
+//  }
+
+//  .icone{
+//      display: block;
+//      text-align: center !important;
+//      font-size: 225px;
+//  }
+
+//  .btn-list {
+//      background: transparent !important; 
+//  }
+
+ .center-div {
+     display: flex;
+     align-items: center;
+     justify-content: center;
+ }
+//  .center-title{
+//      position: absolute;
+//      left: 50%;
+//      top: 50%;
+//      transform: translate(-50% , -50%)
+//  }
+
+//  .bottom-div{
+//      display: flex;
+//      justify-content: center;
+//  }
+ 
+//  .group-bottom-div {
+//      position: absolute;
+//      top: 73%;
+//      left: 50%;
+//      transform: translate(-50%);
+//  }
+ 
+ 
+// http://gradients.io/
+// https://uigradients.com/
+// https://medium.muz.li/oh-mamma-im-in-love-with-gradient-c81943e3c92b
+// https://www.reddit.com/r/starterpacks/comments/9e697w/app_design_in_2018_starter_pack/
