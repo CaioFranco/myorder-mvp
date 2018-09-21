@@ -1,0 +1,39 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>finish-order</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-12>
+        <div class="center-div">
+          <b>
+            <p>-----------------{{time}}-------------------</p>
+          </b>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-4>
+        <div class="center-div group-row">
+          <img class="circle-pic" [src]="img" (click)="open(1)">
+        </div>
+      </ion-col>
+      <ion-col col-4>
+        <div class="center-div group-row">
+          <img class="circle-pic" [src]="img" (click)="open(2)">
+        </div>
+      </ion-col>
+      <ion-col col-4>
+        <div class="center-div group-row">
+          <img class="circle-pic" [src]="img" (click)="open(3)">
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

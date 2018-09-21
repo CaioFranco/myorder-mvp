@@ -21,15 +21,22 @@
           </div>
         </ion-col>
         <ion-col>
-          <div class="container" dragula="COPYABLE" id="right">
+          <div class="container center-div" dragula="COPYABLE" id="right">
             <div>
               <img [src]="imgOrder" class="img-order">
             </div>
           </div>
+          <br>
+          <br>
+          <br>
+          <br>
+          <div class="btn-finish center-div">
+            <button ion-button round (click)="btnFinishOrder()">
+              Finalizar Pedido
+            </button>
+          </div>
         </ion-col>
         <ion-col>
-          <!-- <ion-scroll style="height: 500px"> -->
-          <!-- </ion-scroll> -->
           <h1>Itens Adicionados</h1>
           <ion-list>
             <div *ngFor="let item of orderItens">

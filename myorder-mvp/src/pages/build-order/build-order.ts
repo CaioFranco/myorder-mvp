@@ -1,12 +1,13 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
-import { DragulaService } from 'ng2-dragula';
-import { Subscription } from 'rxjs';
+import { Component } from "@angular/core";
+import { IonicPage, NavController, NavParams, ToastController } from "ionic-angular";
+import { DragulaService } from "ng2-dragula";
+import { Subscription } from "rxjs";
+import { FinishOrderPage } from "../finish-order/finish-order";
 
 @IonicPage()
 @Component({
-  selector: 'page-build-order',
-  templateUrl: 'build-order.html',
+  selector: "page-build-order",
+  templateUrl: "build-order.html",
 })
 export class BuildOrderPage {
 
@@ -32,18 +33,19 @@ export class BuildOrderPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public dragula: DragulaService, public toastCrtl: ToastController) {
     this.imgOrder = this.IMG_DEFAULT;
-    dragula.createGroup('COPYABLE', {
+    dragula.destroy("COPYABLE");
+    dragula.createGroup("COPYABLE", {
       copy: (el, source) => {
-        return source.id === 'left';
+        return source.id === "left";
       },
       accepts: (el, target, source, sibling) => {
-        return target.id !== 'left';
+        return target.id !== "left";
       }
     });
     this.subs.add(this.dragula.drop("COPYABLE")
       .subscribe(({ el, target, source, sibling }) => {
-        this.addClass(el, 'add-ingredient');
-        if (target !== null && target.id !== 'left') {
+        this.addClass(el, "add-ingredient");
+        if (target !== null && target.id !== "left") {
           var id = el.id;
           this.addItemToOrder(id);
         }
@@ -52,7 +54,7 @@ export class BuildOrderPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad BuildOrderPage');
+    console.log("ionViewDidLoad BuildOrderPage");
   }
 
   getIngredient(id: string) {
@@ -80,13 +82,8 @@ export class BuildOrderPage {
   refreshOrder() {
     try {
       var hasCheese: boolean = this.orderItens.find(i => i.id === "cheese") != null;
-      console.log(hasCheese);
       var hasCalabresa = this.orderItens.find(i => i.id === "calabresa") != null;
-      console.log(hasCalabresa);
       var hasMushroom: boolean = this.orderItens.find(i => i.id === "mushroom") != null;
-      console.log(hasMushroom);
-
-      console.log("------------", JSON.stringify(this.orderItens, null, " "));
     } catch (error) {
       console.error(error);
     }
@@ -108,8 +105,13 @@ export class BuildOrderPage {
     } else {
       // this.imgOrder = this.IMG_DEFAULT;
     }
+  }
 
 
+  btnFinishOrder(){
+    console.log("aqui");
+    
+    this.navCtrl.push("FinishOrderPage");
   }
 
   presentToast(id) {
@@ -124,18 +126,18 @@ export class BuildOrderPage {
 
 
   private hasClass(el: Element, name: string): any {
-    return new RegExp('(?:^|\\s+)' + name + '(?:\\s+|$)').test(el.className);
+    return new RegExp("(?:^|\\s+)" + name + "(?:\\s+|$)").test(el.className);
   }
 
   private addClass(el: Element, name: string): void {
     if (!this.hasClass(el, name)) {
-      el.className = el.className ? [el.className, name].join(' ') : name;
+      el.className = el.className ? [el.className, name].join(" ") : name;
     }
   }
 
   private removeClass(el: Element, name: string): void {
     if (this.hasClass(el, name)) {
-      el.className = el.className.replace(new RegExp('(?:^|\\s+)' + name + '(?:\\s+|$)', 'g'), '');
+      el.className = el.className.replace(new RegExp("(?:^|\\s+)" + name + "(?:\\s+|$)", "g"), "");
     }
   }
 

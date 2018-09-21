@@ -1,7 +1,10 @@
 page-categoria {
 
     img{
-        transform: scale(5) ;
+        transform: scale(5) !important;
+        margin: 0;
+        position: absolute;               /* 2 */
+        top: 75%;  
     }
 
 }
@@ -14,6 +17,6 @@ page-categoria {
 }
 
 .group-row{
-    // position: fixed;
-    // top: 50%;
+    position: relative;
+    height: 25em;
 }
