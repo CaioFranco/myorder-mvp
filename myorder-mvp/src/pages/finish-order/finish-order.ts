@@ -27,11 +27,7 @@ export class FinishOrderPage {
 
   async timepassed() {
 
-    while (this.time < 1000) {
-      setTimeout(() => {
-        this.time++;
-      }, 1000);
-    }
+    
   }
 
 

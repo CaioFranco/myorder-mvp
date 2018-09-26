@@ -13,7 +13,14 @@ export class BuildOrderPage {
 
   public subs = new Subscription();
   public IMG_DEFAULT: string = "../../assets/imgs/pizza.svg";
+  public index: any[] = [];
   public imgOrder: string;
+
+  public order = {
+    name: null,
+    edit: false,
+    itens: []
+  }
 
   public ingredients = [{
     id: "cheese",
@@ -32,6 +39,9 @@ export class BuildOrderPage {
   orderItens: any = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public dragula: DragulaService, public toastCrtl: ToastController) {
+    for (let index = 0; index < 10; index++) {
+      this.index[index] = 5;
+    }
     this.imgOrder = this.IMG_DEFAULT;
     dragula.destroy("COPYABLE");
     dragula.createGroup("COPYABLE", {
@@ -62,8 +72,10 @@ export class BuildOrderPage {
   }
 
   addItemToOrder(id: string) {
-    var item = this.getIngredient(id);
-
+    let item = this.getIngredient(id);
+    this.order.name = "blank";
+    this.order.edit = true;
+    this.order.itens.push(item);
 
     this.orderItens.push(item);
     this.presentToast(id);
@@ -109,9 +121,9 @@ export class BuildOrderPage {
 
 
   btnFinishOrder(){
-    console.log("aqui");
-    
-    this.navCtrl.push("FinishOrderPage");
+    console.log("FINISH");
+    console.log(JSON.stringify(this.order) );
+    //this.navCtrl.push("FinishOrderPage");
   }
 
   presentToast(id) {
@@ -124,6 +136,9 @@ export class BuildOrderPage {
     toast.present();
   }
 
+  selectPizza(pizza){
+    console.log("PIZZA: ",pizza);
+  }
 
   private hasClass(el: Element, name: string): any {
     return new RegExp("(?:^|\\s+)" + name + "(?:\\s+|$)").test(el.className);

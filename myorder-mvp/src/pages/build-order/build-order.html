@@ -9,18 +9,27 @@
   <div class="wrapper">
     <ion-grid>
       <ion-row>
-
-        <ion-col>
+        <ion-col col-3>
+          <div *ngFor="let i of index">
+            <div class="center-div">
+              <img src="../../assets/imgs/Pizza.jpg" (click)="selectPizza(i)">
+            </div>
+            <br>
+          </div>
+        </ion-col>
+        <ion-col col-3>
           <div class="container" dragula="COPYABLE" id="left">
             <div *ngFor="let obj of ingredients" [id]="obj.id">
-              <img [src]="obj.src">
-              <h3>
+              <div class="center-div">
+                <img [src]="obj.src">
+              </div>
+              <h3 text-center>
                 <b>{{obj.name}} </b>
               </h3>
             </div>
           </div>
         </ion-col>
-        <ion-col>
+        <ion-col col-3>
           <div class="container center-div" dragula="COPYABLE" id="right">
             <div>
               <img [src]="imgOrder" class="img-order">
@@ -36,25 +45,21 @@
             </button>
           </div>
         </ion-col>
-        <ion-col>
-          <h1>Itens Adicionados</h1>
+        <ion-col col-3>
+          <div class="center-div">
+            <h1>Itens Adicionados</h1>
+          </div>
           <ion-list>
-            <div *ngFor="let item of orderItens">
-              <ion-row>
-                <ion-col>
-                  <h3>
-                    <b>{{item.name}} </b>
-                  </h3>
+            <ion-item *ngFor="let item of orderItens">
+              <ion-thumbnail item-start>
                   <img [src]="item.src">
-                </ion-col>
-                <ion-col>
-                  <button ion-button round color="danger" icon-start (click)="removeItem(item)">
-                    <ion-icon name="trash"></ion-icon>
-                    Remover
-                  </button>
-                </ion-col>
-              </ion-row>
-            </div>
+              </ion-thumbnail>
+              <h2>{{item.name}}</h2>
+              <!-- <p>Hayao Miyazaki • 1988</p> -->
+              <button ion-button  round color="danger" item-end (click)="removeItem(item)">
+                <ion-icon name="trash"></ion-icon>
+              </button>
+            </ion-item>
           </ion-list>
         </ion-col>
       </ion-row>
