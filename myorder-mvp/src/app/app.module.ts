@@ -8,6 +8,8 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { BuildOrderPage } from '../pages/build-order/build-order';
 import { DragulaModule } from 'ng2-dragula';
+import { PizzaProvider } from '../providers/pizza/pizza';
+import { IngredientProvider } from '../providers/ingredient/ingredient';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { DragulaModule } from 'ng2-dragula';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    PizzaProvider,
+    IngredientProvider
   ]
 })
 export class AppModule {}

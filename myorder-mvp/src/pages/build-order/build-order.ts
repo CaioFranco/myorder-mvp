@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams, ToastController } from "ionic-angu
 import { DragulaService } from "ng2-dragula";
 import { Subscription } from "rxjs";
 import { FinishOrderPage } from "../finish-order/finish-order";
+import { IngredientProvider } from "../../providers/ingredient/ingredient";
+import { PizzaProvider } from "../../providers/pizza/pizza";
 
 @IonicPage()
 @Component({
@@ -13,7 +15,6 @@ export class BuildOrderPage {
 
   public subs = new Subscription();
   public IMG_DEFAULT: string = "../../assets/imgs/pizza.svg";
-  public index: any[] = [];
   public imgOrder: string;
 
   public order = {
@@ -22,26 +23,12 @@ export class BuildOrderPage {
     itens: []
   }
 
-  public ingredients = [{
-    id: "cheese",
-    src: "../../assets/imgs/cheese.svg",
-    name: "Mussarela"
-  }, {
-    id: "calabresa",
-    src: "../../assets/imgs/salami.svg",
-    name: "Calabresa",
-  }, {
-    id: "mushroom",
-    src: "../../assets/imgs/mushroom.svg",
-    name: "Cogumelo",
-  }];
+  public pizzas;
+  public ingredients;
 
-  orderItens: any = [];
+  orderItems: any[] = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public dragula: DragulaService, public toastCrtl: ToastController) {
-    for (let index = 0; index < 10; index++) {
-      this.index[index] = 5;
-    }
     this.imgOrder = this.IMG_DEFAULT;
     dragula.destroy("COPYABLE");
     dragula.createGroup("COPYABLE", {
@@ -63,8 +50,9 @@ export class BuildOrderPage {
     );
   }
 
-  ionViewDidLoad() {
-    console.log("ionViewDidLoad BuildOrderPage");
+  ionViewDidLoad(){
+    this.ingredients = IngredientProvider.getIngredients();
+    this.pizzas= PizzaProvider.getPizzas();
   }
 
   getIngredient(id: string) {
@@ -77,35 +65,33 @@ export class BuildOrderPage {
     this.order.edit = true;
     this.order.itens.push(item);
 
-    this.orderItens.push(item);
+    this.orderItems.push(item);
+    
     this.presentToast(id);
     this.refreshOrder();
   }
 
   removeItem(item) {
-    var index = this.orderItens.indexOf(item, 0);
+    var index = this.orderItems.indexOf(item, 0);
     console.log(index);
     if (index > -1) {
-      this.orderItens.splice(index, 1);
+      this.orderItems.splice(index, 1);
     }
     this.refreshOrder();
   }
 
   refreshOrder() {
     try {
-      var hasCheese: boolean = this.orderItens.find(i => i.id === "cheese") != null;
-      var hasCalabresa = this.orderItens.find(i => i.id === "calabresa") != null;
-      var hasMushroom: boolean = this.orderItens.find(i => i.id === "mushroom") != null;
+      var hasCheese: boolean = this.orderItems.find(i => i.id === "cheese") != null;
+      var hasMushroom: boolean = this.orderItems.find(i => i.id === "mushroom") != null;
+      var hasCalabresa:boolean = this.orderItems.find(i => i.id === "calabresa") != null;
     } catch (error) {
       console.error(error);
     }
 
     if (hasCheese) {
       console.log("ADD IMAGE QUEIJO");
-      // this.imgOrder = "../../assets/imgs/pizza_salami.svg";
-    } else {
-      // this.imgOrder = this.IMG_DEFAULT;
-    }
+    } 
     if (hasCalabresa) {
       this.imgOrder = "../../assets/imgs/pizza_salami.svg";
     } else {
@@ -113,17 +99,19 @@ export class BuildOrderPage {
     }
     if (hasMushroom) {
       console.log("ADD IMAGE COGUMELO");
-      // this.imgOrder = "../../assets/imgs/pizza_salami.svg";
-    } else {
-      // this.imgOrder = this.IMG_DEFAULT;
-    }
+    } 
   }
 
 
-  btnFinishOrder(){
+  btnFinishOrder() {
     console.log("FINISH");
-    console.log(JSON.stringify(this.order) );
+    console.log(JSON.stringify(this.order));
     //this.navCtrl.push("FinishOrderPage");
+  }
+
+  btnCleanOrder(){
+    this.orderItems = [];
+    this.refreshOrder();
   }
 
   presentToast(id) {
@@ -136,8 +124,11 @@ export class BuildOrderPage {
     toast.present();
   }
 
-  selectPizza(pizza){
-    console.log("PIZZA: ",pizza);
+  selectPizza(pizza) {
+    pizza.ingredient.forEach(element => {
+      this.orderItems.push(element);
+    });
+    console.log("PIZZA: ", JSON.stringify(pizza));
   }
 
   private hasClass(el: Element, name: string): any {
@@ -155,5 +146,6 @@ export class BuildOrderPage {
       el.className = el.className.replace(new RegExp("(?:^|\\s+)" + name + "(?:\\s+|$)", "g"), "");
     }
   }
+
 
 }

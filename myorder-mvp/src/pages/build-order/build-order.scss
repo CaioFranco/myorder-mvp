@@ -4,6 +4,30 @@ page-build-order {
         width: 125px;
         height: 125px;
     }
+
+    ion-icon{
+        transform: scale(2.0) !important;
+    }
+
+    ion-item{
+        border-bottom: 0px !important;
+        border-top: 0px !important;
+        background-color: transparent !important;
+    }
+
+    ion-content .scroll-content{
+        overflow: hidden !important;
+        overflow-x: hidden !important;
+        overflow-y: hidden !important;
+    }
+
+    ion-scroll{
+        .scroll-content{
+
+            overflow-y: scroll !important;
+        }
+
+    }
 }
 
 .add-ingredient{
@@ -14,9 +38,4 @@ page-build-order {
   
     width: 400px;
     height: 400px;
-}
-
-.item-button{
-    // height: 30px !important;
-    // font-size: 1.6rem !important;
 }
