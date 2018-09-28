@@ -84,6 +84,7 @@ export class BuildOrderPage {
       var hasTomate: boolean = ingredients.find(i => i.id === "tomato") != null;
       var hasCalabresa: boolean = ingredients.find(i => i.id === "calabresa") != null;
       var hasCebola: boolean = ingredients.find(i => i.id === "cebola") != null;
+      var hasCatupiry: boolean = ingredients.find(i => i.id === "catupiry") != null;
     } catch (error) {
       console.error("refreshOrder:", error);
     }
@@ -94,16 +95,56 @@ export class BuildOrderPage {
     if (hasCheese) { 
       this.imgOrder = "../../assets/imgs/pizzas/mussarela.png"
     }
-
-    if (hasCalabresa && !hasCebola) {
-      this.imgOrder = "../../assets/imgs/pizzas/calabresa.png";
-    } 
+    if (hasCheese && hasCatupiry) { 
+      this.imgOrder = "../../assets/imgs/pizzas/mussarela-cat.png"
+    }
     if (hasTomate && hasCheese) { 
       this.imgOrder = "../../assets/imgs/pizzas/mussarela-t.png"
     } 
-    if (hasCalabresa && hasCebola) { 
+    if (hasTomate && hasCheese && hasCatupiry) { 
+      this.imgOrder = "../../assets/imgs/pizzas/mussarela-t-c.png"
+    } 
+    if (!hasTomate && hasCheese && hasCalabresa && hasCatupiry) { 
+      this.imgOrder = "../../assets/imgs/pizzas/calabresa-q.png"
+    } 
+// calabresa
+    if (hasCalabresa && !hasCebola && !hasCheese) {
+      this.imgOrder = "../../assets/imgs/pizzas/calabresa.png";
+    }   
+    if (!hasTomate && hasCheese && hasCalabresa) { 
+      this.imgOrder = "../../assets/imgs/pizzas/calabresa-m.png"
+    } 
+    if (hasCalabresa && hasCebola ) { 
       this.imgOrder = "../../assets/imgs/pizzas/calabresa-c.png"
     }
+    if (hasCalabresa && hasCatupiry && !hasCebola) { 
+      this.imgOrder = "../../assets/imgs/pizzas/calabresa-cat.png"
+    }
+    if (hasTomate && hasCheese && hasCalabresa) { 
+      this.imgOrder = "../../assets/imgs/pizzas/calabresa-q-t.png"
+    } 
+
+    if (hasCalabresa && hasCatupiry && !hasCebola && hasCheese) { 
+      this.imgOrder = "../../assets/imgs/pizzas/calabresa-m-cat.png"
+    }
+
+    if (hasCalabresa && hasCebola && hasCatupiry && !hasCheese) {
+      this.imgOrder = "../../assets/imgs/pizzas/calabresa-c-cat.png";
+    } 
+    if (hasCalabresa && hasCebola && hasCheese && !hasCatupiry && !hasTomate) { 
+      this.imgOrder = "../../assets/imgs/pizzas/calabresa-c-q.png"
+    }
+
+    if (hasCalabresa && hasCebola && hasCheese && hasTomate && !hasCatupiry) {
+      this.imgOrder = "../../assets/imgs/pizzas/calabresa-c-q-t.png";
+    } 
+    if (hasCalabresa && hasCebola && hasCheese && hasTomate && hasCatupiry) {
+      this.imgOrder = "../../assets/imgs/pizzas/calabresa-c-t-q-cat.png";
+    } 
+    // 
+    // 
+
+
   }
 
   presentToastAddItem(id) {
