@@ -2,9 +2,10 @@ import { Component } from "@angular/core";
 import { IonicPage, NavController, NavParams, ToastController } from "ionic-angular";
 import { DragulaService } from "ng2-dragula";
 import { Subscription } from "rxjs";
-import { FinishOrderPage } from "../finish-order/finish-order";
 import { IngredientProvider } from "../../providers/ingredient/ingredient";
 import { PizzaProvider } from "../../providers/pizza/pizza";
+import { UtilProvider } from "../../providers/util/util";
+import { Order } from "../../model/order";
 
 @IonicPage()
 @Component({
@@ -14,22 +15,18 @@ import { PizzaProvider } from "../../providers/pizza/pizza";
 export class BuildOrderPage {
 
   public subs = new Subscription();
-  public IMG_DEFAULT: string = "../../assets/imgs/pizza.svg";
+  public IMG_DEFAULT: string = "../../assets/imgs/pizzas/mussarela.png";
   public imgOrder: string;
 
-  public order = {
-    name: null,
-    edit: false,
-    itens: []
-  }
+  public order : Order;
 
   public pizzas;
   public ingredients;
 
-  orderItems: any[] = [];
-
-  constructor(public navCtrl: NavController, public navParams: NavParams, public dragula: DragulaService, public toastCrtl: ToastController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public dragula: DragulaService, public toastCrtl: ToastController,
+    public util: UtilProvider) {
     this.imgOrder = this.IMG_DEFAULT;
+    this.order = new Order("custom");
     dragula.destroy("COPYABLE");
     dragula.createGroup("COPYABLE", {
       copy: (el, source) => {
@@ -41,80 +38,71 @@ export class BuildOrderPage {
     });
     this.subs.add(this.dragula.drop("COPYABLE")
       .subscribe(({ el, target, source, sibling }) => {
-        this.addClass(el, "add-ingredient");
+        this.util.addClass(el, "add-ingredient");
         if (target !== null && target.id !== "left") {
           var id = el.id;
+          this.presentToastAddItem(id);
           this.addItemToOrder(id);
         }
       })
     );
   }
 
-  ionViewDidLoad(){
+  ionViewDidLoad() {
     this.ingredients = IngredientProvider.getIngredients();
-    this.pizzas= PizzaProvider.getPizzas();
+    this.pizzas = PizzaProvider.getPizzas();
   }
 
   getIngredient(id: string) {
     return this.ingredients.find(item => item.id === id);
   }
 
-  addItemToOrder(id: string) {
+  addItemToOrder(id: string, pizza?) {
     let item = this.getIngredient(id);
-    this.order.name = "blank";
-    this.order.edit = true;
-    this.order.itens.push(item);
-
-    this.orderItems.push(item);
-    
-    this.presentToast(id);
-    this.refreshOrder();
+    try {
+      this.order.name = pizza != null ? pizza : "custom";
+      this.order.itens.push(item);
+      this.refreshOrder();
+    } catch (error) {
+      console.error("addItemToOrder", JSON.stringify(error));
+    }
   }
 
   removeItem(item) {
-    var index = this.orderItems.indexOf(item, 0);
+    var index = this.order.itens.indexOf(item, 0);
     console.log(index);
     if (index > -1) {
-      this.orderItems.splice(index, 1);
+      this.order.itens.splice(index, 1);
     }
     this.refreshOrder();
   }
 
   refreshOrder() {
+    let ingredients = this.order.itens;
     try {
-      var hasCheese: boolean = this.orderItems.find(i => i.id === "cheese") != null;
-      var hasMushroom: boolean = this.orderItems.find(i => i.id === "mushroom") != null;
-      var hasCalabresa:boolean = this.orderItems.find(i => i.id === "calabresa") != null;
+      var hasCheese: boolean = ingredients.find(i => i.id === "cheese") != null;
+      var hasTomate: boolean = ingredients.find(i => i.id === "tomato") != null;
+      var hasCalabresa: boolean = ingredients.find(i => i.id === "calabresa") != null;
     } catch (error) {
-      console.error(error);
+      console.error("refreshOrder:", error);
     }
 
-    if (hasCheese) {
-      console.log("ADD IMAGE QUEIJO");
-    } 
+    if (hasCheese) { }
+
     if (hasCalabresa) {
       this.imgOrder = "../../assets/imgs/pizza_salami.svg";
     } else {
       this.imgOrder = this.IMG_DEFAULT;
     }
-    if (hasMushroom) {
-      console.log("ADD IMAGE COGUMELO");
-    } 
+    if (hasTomate) { 
+      this.imgOrder = "../../assets/imgs/pizzas/mussarela-t.png"
+    } else {
+      this.imgOrder = this.IMG_DEFAULT;
+    }
+
   }
 
-
-  btnFinishOrder() {
-    console.log("FINISH");
-    console.log(JSON.stringify(this.order));
-    //this.navCtrl.push("FinishOrderPage");
-  }
-
-  btnCleanOrder(){
-    this.orderItems = [];
-    this.refreshOrder();
-  }
-
-  presentToast(id) {
+  presentToastAddItem(id) {
     var i = this.getIngredient(id);
     const toast = this.toastCrtl.create({
       message: `${i.name} was added successfully`,
@@ -125,27 +113,39 @@ export class BuildOrderPage {
   }
 
   selectPizza(pizza) {
+    if (this.order.name !== "custom") {
+      this.btnCleanOrder();
+    } else if (this.order.itens != null && this.order.itens.length != 0) {
+      this.util.showToast("ta aqui!!!!!!!!!!!!!");
+      return;
+    }
     pizza.ingredient.forEach(element => {
-      this.orderItems.push(element);
+      this.addItemToOrder(element.id, pizza.name);
     });
     console.log("PIZZA: ", JSON.stringify(pizza));
   }
 
-  private hasClass(el: Element, name: string): any {
-    return new RegExp("(?:^|\\s+)" + name + "(?:\\s+|$)").test(el.className);
-  }
-
-  private addClass(el: Element, name: string): void {
-    if (!this.hasClass(el, name)) {
-      el.className = el.className ? [el.className, name].join(" ") : name;
+  btnFinishOrder() {
+    console.log("FINISH");
+    console.log(JSON.stringify(this.order));
+    if (this.order.itens !== null && this.order.itens.length !== 0) {
+      this.navCtrl.push("FinishOrderPage", {order: this.order});
+    } else {
+      this.util.showToast("PEDIDO VAZIO!!!!!!!!!!!!!!!!!!!!!!!!!!");
     }
   }
 
-  private removeClass(el: Element, name: string): void {
-    if (this.hasClass(el, name)) {
-      el.className = el.className.replace(new RegExp("(?:^|\\s+)" + name + "(?:\\s+|$)", "g"), "");
-    }
+  btnCleanOrder() {
+    this.order.name = "custom";
+    this.order.itens = [];
+    this.refreshOrder();
   }
 
+  btnGoBack() {
+    this.navCtrl.pop();
+  }
 
+  btnRotation() {
+    this.util.showToast("VAI GIRAR!!!");
+  }
 }

@@ -10,7 +10,7 @@ export class CategoriaPage {
 
   items: any[] = [];
 
-  pizzaImg: string = "../../assets/imgs/Pizza.jpg";
+  pizzaImg: string = "../../assets/imgs/pizzas/mussarela.png";
   refriImg: string = "../../assets/imgs/Bebida.jpg";
   sobremesaImg: string = "../../assets/imgs/Sobremesa.jpg";
 
@@ -25,7 +25,11 @@ export class CategoriaPage {
     this.items.push(this.sobremesaImg);
   }
 
-  showProdutos(categoria_id: string) {
+  personalizar(categoria_id: string) {
     this.navCtrl.push("BuildOrderPage", { categoria_id: categoria_id });
+  }
+  
+  showProdutos(categoria_id: string) {
+    this.navCtrl.push("ProdutosPage", { categoria_id: categoria_id });
   }
 }

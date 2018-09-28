@@ -1,11 +1,21 @@
 <ion-header no-border>
-  <ion-navbar transparent>
-    <ion-title>MyOrder</ion-title>
+  <ion-navbar transparent hideBackButton="true">
+    <ion-title>
+      <h1><b>Prepare seu pedido</b></h1>
+    </ion-title>
   </ion-navbar>
 </ion-header>
-
-
 <ion-content padding>
+  <ion-fab left top small>
+    <button ion-fab color="light" (click)="btnGoBack()">
+      <ion-icon name="arrow-round-back"></ion-icon>
+    </button>
+  </ion-fab>
+  <ion-fab right top small>
+    <button ion-fab color="light" (click)="btnRotation()">
+      <ion-icon name="switch"></ion-icon>
+    </button>
+  </ion-fab>
   <div class="wrapper">
     <ion-grid>
       <ion-row>
@@ -16,22 +26,25 @@
                 <div class="center-div">
                   <img [src]="pizza.src" (click)="selectPizza(pizza)">
                 </div>
+                <h2 text-center><b>{{pizza.name}}</b></h2>
                 <br>
               </div>
             </ion-list>
           </ion-scroll>
         </ion-col>
         <ion-col col-3>
-          <div class="container" dragula="COPYABLE" id="left">
-            <div *ngFor="let obj of ingredients" [id]="obj.id">
-              <div class="center-div">
-                <img [src]="obj.src">
+          <ion-scroll style="height: 600px">
+            <div class="container" dragula="COPYABLE" id="left">
+              <div *ngFor="let obj of ingredients" [id]="obj.id">
+                <div class="center-div">
+                  <img [src]="obj.src">
+                </div>
+                <h3 text-center>
+                  <b>{{obj.name}} </b>
+                </h3>
               </div>
-              <h3 text-center>
-                <b>{{obj.name}} </b>
-              </h3>
             </div>
-          </div>
+          </ion-scroll>
         </ion-col>
         <ion-col col-4>
           <div class="container center-div" dragula="COPYABLE" id="right">
@@ -44,11 +57,11 @@
           <br>
           <br>
           <div class="btn-finish center-div">
-            <button ion-button round color="secondary" (click)="btnFinishOrder()">
-              Finalizar Pedido
-            </button>
             <button ion-button round (click)="btnCleanOrder()">
               Limpar Pedido
+            </button>
+            <button ion-button round color="secondary" (click)="btnFinishOrder()">
+              Finalizar Pedido
             </button>
           </div>
         </ion-col>
@@ -56,21 +69,23 @@
           <div class="center-div">
             <h1>Itens Adicionados</h1>
           </div>
-          <ion-list >
-            <ion-item *ngFor="let item of orderItems" no-border>
-              <ion-row>
-                <ion-thumbnail item-start>
-                  <img [src]="item.src">
-                </ion-thumbnail>
-                <button ion-button clear color="danger" item-end (click)="removeItem(item)">
-                  <ion-icon name="trash"></ion-icon>
-                </button>
-              </ion-row>
-              <ion-row>
-                <h2><b>{{item.name}}</b></h2>
-              </ion-row>
-            </ion-item>
-          </ion-list>
+          <ion-scroll style="height: 600px">
+            <ion-list>
+              <ion-item *ngFor="let item of order.itens" no-border>
+                <ion-row>
+                  <ion-thumbnail item-start>
+                    <img [src]="item.src">
+                  </ion-thumbnail>
+                  <button ion-button clear color="danger" item-end (click)="removeItem(item)">
+                    <ion-icon name="trash"></ion-icon>
+                  </button>
+                </ion-row>
+                <ion-row>
+                  <h2><b>{{item.name}}</b></h2>
+                </ion-row>
+              </ion-item>
+            </ion-list>
+          </ion-scroll>
         </ion-col>
       </ion-row>
     </ion-grid>

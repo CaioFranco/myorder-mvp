@@ -50,6 +50,10 @@ ion-content {
     background-size: cover;
 }
 
+.center-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 //  h2 {
 //      font-size: 2rem;
 //  }  
@@ -76,10 +80,6 @@ ion-content {
 //      background: transparent !important; 
 //  }
 
- .center-div {
-     display: flex;
-     align-items: center;
-     justify-content: center;
  }
 //  .center-title{
 //      position: absolute;

@@ -16,9 +16,14 @@ export class IngredientProvider {
       src: "../../assets/imgs/salami.svg",
       name: "Calabresa",
     }, {
-      id: "mushroom",
-      src: "../../assets/imgs/mushroom.svg",
-      name: "Cogumelo",
+      id: "tomato",
+      src: "../../assets/imgs/ingredientes/tomate.png",
+      name: "Tomate",
+    },
+    {
+      id: "catupiry",
+      src: "../../assets/imgs/ingredientes/catupiry.png",
+      name: "Catupiry",
     }];
   }
 }

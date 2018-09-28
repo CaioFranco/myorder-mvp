@@ -1,17 +1,12 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-navbar>
-</ion-header>
-
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
-  <button ion-button (click)="goBuildOrder()">
-    Monte seu Pedido
-  </button>
+  <h3>MyOrder</h3>
+  <img src="assets/imgs/tela-inicial.png" alt="">
+  <form>
+    <ion-label stacked> Mesa </ion-label>
+      <ion-label class="item item-input">
+        <input type="text" style="width: 6%; height: 40px; text-align: center">
+      </ion-label>
+</form>
+
+<button ion-button block (click)="login()">Entrar</button>
 </ion-content>

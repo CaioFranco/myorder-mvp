@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-navbar>
+    <ion-navbar transparent hideBackButton="true">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Produtos</ion-title>
+  </ion-navbar>
+</ion-header>
+
+      <ion-content padding>
+        <div class="row">
+          <ion-list ion-item  col-5 *ngFor="let bebida of bebidas" style="margin-left: 5.4% ">
+              <!-- <ion-thumbnail item-start> -->
+                <img [src]="bebida.src">
+              <!-- </ion-thumbnail> -->
+              <h2 style="text-align: center;">{{bebida.name}}</h2>
+              <ion-icon name="add-circle" item-start (click)="increaseQuantity(bebida.quantidade)" color="primary"></ion-icon>
+              <ion-icon name="remove-circle" item-end (click)="increaseQuantity(bebida.id)" color="danger"></ion-icon>
+              <p *ngIf="bebida.quantidade>0" class="nolinebreak">{{bebida.quantidade}}</p>
+              <!-- <h2> R$ {{item.preco}}</h2> -->
+            <!-- <button ion-button outline (click) = "addToCart(item)">+</button> -->
+           </ion-list>
+           <br>
+
+          </div>
+        <!-- </ion-content> -->
+
+    </ion-content>
