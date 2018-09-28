@@ -21,23 +21,16 @@ export class PizzaProvider {
       }]
     }, {
       name: "calabresa",
-      src: "../../assets/imgs/pizzas/calabresa.png",
+      src: "../../assets/imgs/pizzas/calabresa-c.png",
       ingredient: [{
         id: "calabresa",
-        src: "../../assets/imgs/salami.svg",
+        src: "../../assets/imgs/ingredientes/salami.svg",
         name: "Calabresa",
-      }]
-    }, {
-      name: "mussarela",
-      src: "../../assets/imgs/Pizza.jpg",
-      ingredient: [{
-        id: "cheese",
-        src: "../../assets/imgs/cheese.svg",
-        name: "Mussarela"
-      }, {
-        id: "tomato",
-        src: "../../assets/imgs/ingredientes/tomate.png",
-        name: "Tomate",
+      },
+      {
+        id: "cebola",
+        src: "../../assets/imgs/ingredientes/cebola.png",
+        name: "Cebola",
       }]
     }];
   }

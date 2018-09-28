@@ -10,9 +10,9 @@ export class CategoriaPage {
 
   items: any[] = [];
 
-  pizzaImg: string = "../../assets/imgs/pizzas/mussarela.png";
-  refriImg: string = "../../assets/imgs/Bebida.jpg";
-  sobremesaImg: string = "../../assets/imgs/Sobremesa.jpg";
+  pizzaImg: string = "../../assets/imgs/pizzas/frango-catupiry.png";
+  refriImg: string = "../../assets/imgs/bebida.png";
+  sobremesaImg: string = "../../assets/imgs/sobremesa.png";
 
   constructor(
     public navCtrl: NavController,

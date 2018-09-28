@@ -15,7 +15,7 @@ import { Order } from "../../model/order";
 export class BuildOrderPage {
 
   public subs = new Subscription();
-  public IMG_DEFAULT: string = "../../assets/imgs/pizzas/mussarela.png";
+  public IMG_DEFAULT: string = "../../assets/imgs/pizzas/pizza.png";
   public imgOrder: string;
 
   public order : Order;
@@ -83,23 +83,27 @@ export class BuildOrderPage {
       var hasCheese: boolean = ingredients.find(i => i.id === "cheese") != null;
       var hasTomate: boolean = ingredients.find(i => i.id === "tomato") != null;
       var hasCalabresa: boolean = ingredients.find(i => i.id === "calabresa") != null;
+      var hasCebola: boolean = ingredients.find(i => i.id === "cebola") != null;
     } catch (error) {
       console.error("refreshOrder:", error);
     }
-
-    if (hasCheese) { }
-
-    if (hasCalabresa) {
-      this.imgOrder = "../../assets/imgs/pizza_salami.svg";
-    } else {
+    if (!hasCheese && !hasCalabresa) { 
       this.imgOrder = this.IMG_DEFAULT;
     }
-    if (hasTomate) { 
+
+    if (hasCheese) { 
+      this.imgOrder = "../../assets/imgs/pizzas/mussarela.png"
+    }
+
+    if (hasCalabresa && !hasCebola) {
+      this.imgOrder = "../../assets/imgs/pizzas/calabresa.png";
+    } 
+    if (hasTomate && hasCheese) { 
       this.imgOrder = "../../assets/imgs/pizzas/mussarela-t.png"
-    } else {
-      this.imgOrder = this.IMG_DEFAULT;
+    } 
+    if (hasCalabresa && hasCebola) { 
+      this.imgOrder = "../../assets/imgs/pizzas/calabresa-c.png"
     }
-
   }
 
   presentToastAddItem(id) {

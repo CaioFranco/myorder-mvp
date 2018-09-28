@@ -1,15 +1,33 @@
-<ion-header>
-  <ion-navbar>
+<ion-header no-border>
     <ion-navbar transparent hideBackButton="true">
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>Produtos</ion-title>
-  </ion-navbar>
-</ion-header>
-
-      <ion-content padding>
+      <ion-title>
+        <h1><b>Prepare seu pedido</b></h1>
+      </ion-title>
+    </ion-navbar>
+  </ion-header>
+  <ion-content padding>
+    <ion-fab left top small>
+      <button ion-fab color="light" (click)="btnGoBack()">
+        <ion-icon name="arrow-round-back"></ion-icon>
+      </button>
+    </ion-fab>
+    <ion-fab right top small>
+      <button ion-fab color="light" (click)="btnRotation()">
+        <ion-icon name="switch"></ion-icon>
+      </button>
+    </ion-fab>
+          <ion-fab left top small>
+              <button ion-fab color="light" (click)="btnGoBack()">
+                <ion-icon name="arrow-round-back"></ion-icon>
+              </button>
+            </ion-fab>
+            <ion-fab right top small>
+              <button ion-fab color="light" (click)="btnRotation()">
+                <ion-icon name="switch"></ion-icon>
+              </button>
+            </ion-fab>
         <div class="row">
-          <ion-list ion-item  col-5 *ngFor="let bebida of bebidas" style="margin-left: 5.4% ">
+          <ion-list ion-item class="dCard" col-5 *ngFor="let bebida of bebidas">
               <!-- <ion-thumbnail item-start> -->
                 <img [src]="bebida.src">
               <!-- </ion-thumbnail> -->

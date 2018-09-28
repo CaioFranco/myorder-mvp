@@ -43,5 +43,8 @@ increaseQuantity(produto: BebidaProvider){
 // this.navCtrl.setRoot("CartPage");
 // }
 
+btnGoBack() {
+  this.navCtrl.pop();
+}
 
 }
