@@ -27,20 +27,23 @@
               </button>
             </ion-fab>
         <div class="row">
-          <ion-list ion-item class="dCard" col-5 *ngFor="let bebida of bebidas">
-              <!-- <ion-thumbnail item-start> -->
-                <img [src]="bebida.src">
-              <!-- </ion-thumbnail> -->
-              <h2 style="text-align: center;">{{bebida.name}}</h2>
-              <ion-icon name="add-circle" item-start (click)="increaseQuantity(bebida.quantidade)" color="primary"></ion-icon>
-              <ion-icon name="remove-circle" item-end (click)="increaseQuantity(bebida.id)" color="danger"></ion-icon>
-              <p *ngIf="bebida.quantidade>0" class="nolinebreak">{{bebida.quantidade}}</p>
-              <!-- <h2> R$ {{item.preco}}</h2> -->
-            <!-- <button ion-button outline (click) = "addToCart(item)">+</button> -->
-           </ion-list>
+            <ion-list ion-item class="dCard" col-5 *ngFor="let bebida of bebidas">
+                <!-- <ion-thumbnail item-start> -->
+                  <img [src]="bebida.src">
+                <!-- </ion-thumbnail> -->
+                <h2 style="text-align: center;">{{bebida.name}}</h2>
+                <h2 *ngIf="bebida.quantidade>0" class="nolinebreak" style="text-align: center;">{{bebida.quantidade}}</h2>
+                <ion-icon name="remove-circle" item-end (click)="decreaseQuantity(bebida)" color="danger"></ion-icon>
+                <ion-icon name="add-circle" item-start (click)="addToCart(bebida)" color="primary" ></ion-icon>
+                <!-- <ion-icon name="add-circle" item-start (click)="increaseQuantity(bebida)" color="primary" ></ion-icon> -->
+                <!-- <h2> R$ {{item.preco}}</h2> -->
+             </ion-list>
            <br>
 
           </div>
+          <div style="text-align: center;">
+          <button ion-button round (click) = "finish(item)">Finalizar</button>
+        </div>
         <!-- </ion-content> -->
 
     </ion-content>

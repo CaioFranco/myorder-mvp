@@ -2,6 +2,7 @@ import { Injectable } from "../../../node_modules/@angular/core";
 import { StorageService } from "./storage.service";
 import { Cart } from "./cart";
 import { BebidaProvider } from "../bebida/bebida";
+import { ProdutoDTO } from "../produto.dto";
 
 @Injectable()
 export class CartService{
@@ -24,11 +25,52 @@ return cart;
     }
 
 
-    addProduto(produto: BebidaProvider): Cart {
+    addProduto(produto: ProdutoDTO): Cart {
         let cart = this.getCart();
-        let position = cart.items.findIndex(x => x.produto == produto);
+        let position = cart.items.findIndex(x => x.produto.id == produto.id);
         if (position == -1) {
             cart.items.push({ quantidade: 1, produto: produto });
+        }
+        this.storage.setCart(cart);
+        console.log(cart.items);
+        return cart;
+    }
+    total() : number {
+        let cart = this.getCart();
+        let sum = 0;
+        console.log("totalera");
+        for (var i=0; i<cart.items.length; i++) {
+            sum += cart.items[i].produto.preco * cart.items[i].quantidade;
+        }
+        return sum;
+    }
+
+    increaseQuantity(produto: ProdutoDTO): Cart {
+        let cart = this.getCart();
+        let position = cart.items.findIndex(x => x.produto.id == produto.id);
+        if (position != -1) {
+            cart.items[position].quantidade++;
+        }
+        this.storage.setCart(cart);
+        return cart;
+    }
+    removeProduto(produto: ProdutoDTO): Cart {
+        let cart = this.getCart();
+        let position = cart.items.findIndex(x => x.produto.id == produto.id);
+        if (position != -1) {
+            cart.items.splice(position, 1);
+        }
+        this.storage.setCart(cart);
+        return cart;
+    }
+    decreaseQuantity(produto: ProdutoDTO): Cart {
+        let cart = this.getCart();
+        let position = cart.items.findIndex(x => x.produto.id == produto.id);
+        if (position != -1) {
+            cart.items[position].quantidade--;
+            if (cart.items[position].quantidade < 1) {
+                cart = this.removeProduto(produto);
+            }
         }
         this.storage.setCart(cart);
         return cart;

@@ -12,6 +12,8 @@ import { PizzaProvider } from '../providers/pizza/pizza';
 import { IngredientProvider } from '../providers/ingredient/ingredient';
 import { UtilProvider } from '../providers/util/util';
 import { BebidaProvider } from '../providers/bebida/bebida';
+import { CartService } from '../providers/cart/cart.service';
+import { StorageService } from '../providers/cart/storage.service';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { BebidaProvider } from '../providers/bebida/bebida';
     PizzaProvider,
     IngredientProvider,
     UtilProvider,
-    BebidaProvider
+    BebidaProvider,
+    CartService,
+    StorageService
   ]
 })
 export class AppModule {}

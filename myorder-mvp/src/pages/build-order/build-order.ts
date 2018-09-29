@@ -174,7 +174,7 @@ export class BuildOrderPage {
     console.log("FINISH");
     console.log(JSON.stringify(this.order));
     if (this.order.itens !== null && this.order.itens.length !== 0) {
-      this.navCtrl.push("FinishOrderPage", {order: this.order});
+      this.navCtrl.push("ProdutosPage", {order: this.order});
     } else {
       this.util.showToast("PEDIDO VAZIO!!!!!!!!!!!!!!!!!!!!!!!!!!");
     }

@@ -6,8 +6,12 @@ page-produtos {
         max-height: 100px;
     }
     .nolinebreak{
-        float:left;
         padding-right: 10px;
+        font-size: 3.0rem;
+        color: black;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
     }
     .dCard{
         margin-left: 6%;
@@ -16,7 +20,6 @@ page-produtos {
           opacity: 90%;
           background-size: cover;
           background-position: right top;
-
     }
     ion-item{
         border-bottom: 0px !important;
@@ -30,5 +33,6 @@ page-produtos {
     ion-icon{
         transform: scale(2.0) !important;
     }
+    
 
 }
