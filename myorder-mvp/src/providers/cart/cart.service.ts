@@ -1,24 +1,24 @@
-import { Injectable } from "../../../node_modules/@angular/core";
+import { Injectable } from "@angular/core";
 import { StorageService } from "./storage.service";
 import { Cart } from "./cart";
-import { BebidaProvider } from "../bebida/bebida";
 import { ProdutoDTO } from "../produto.dto";
 
 @Injectable()
-export class CartService{
+export class CartService {
 
-    constructor(public storage: StorageService){
-    }
-    createOrClearCart() : Cart {
-let cart: Cart = {items:[]};
-this.storage.setCart(cart);
-return cart; 
-
+    constructor(public storage: StorageService) {
     }
 
-    getCart() : Cart {
+    createOrClearCart(): Cart {
+        let cart: Cart = { items: [] };
+        this.storage.setCart(cart);
+        return cart;
+
+    }
+
+    getCart(): Cart {
         let cart: Cart = this.storage.getCart();
-        if(cart==null){
+        if (cart == null) {
             cart = this.createOrClearCart();
         }
         return cart;
@@ -32,14 +32,15 @@ return cart;
             cart.items.push({ quantidade: 1, produto: produto });
         }
         this.storage.setCart(cart);
-        console.log(cart.items);
+        console.log(JSON.stringify(cart.items));
         return cart;
     }
-    total() : number {
+    
+    total(): number {
         let cart = this.getCart();
         let sum = 0;
         console.log("totalera");
-        for (var i=0; i<cart.items.length; i++) {
+        for (var i = 0; i < cart.items.length; i++) {
             sum += cart.items[i].produto.preco * cart.items[i].quantidade;
         }
         return sum;
