@@ -8,7 +8,6 @@ export class CartService {
 
     constructor(public storage: StorageService) {
     }
-
     createOrClearCart(): Cart {
         let cart: Cart = { items: [] };
         this.storage.setCart(cart);
@@ -29,13 +28,24 @@ export class CartService {
         let cart = this.getCart();
         let position = cart.items.findIndex(x => x.produto.id == produto.id);
         if (position == -1) {
-            cart.items.push({ quantidade: 1, produto: produto });
+            cart.items.push({ quantidade: 1, produto: produto, src:"0"});
         }
         this.storage.setCart(cart);
         console.log(JSON.stringify(cart.items));
         return cart;
     }
-    
+    addPizza(produto: ProdutoDTO): Cart {
+        let cart = this.getCart();
+        let position = cart.items.findIndex(x => x.produto.id == produto.id);
+        if (position == -1) {
+            cart.items.push({ quantidade: 1, produto: produto, src: produto.src});
+
+        } 
+        this.storage.setCart(cart);
+        return cart;
+
+    }
+
     total(): number {
         let cart = this.getCart();
         let sum = 0;

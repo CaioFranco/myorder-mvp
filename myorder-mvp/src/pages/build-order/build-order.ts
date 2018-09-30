@@ -6,6 +6,8 @@ import { IngredientProvider } from "../../providers/ingredient/ingredient";
 import { PizzaProvider } from "../../providers/pizza/pizza";
 import { UtilProvider } from "../../providers/util/util";
 import { Order } from "../../model/order";
+import { ProdutoDTO } from "../../providers/produto.dto";
+import { CartService } from "../../providers/cart/cart.service";
 
 @IonicPage()
 @Component({
@@ -25,12 +27,8 @@ export class BuildOrderPage {
   public pizzas;
   public ingredients;
 
-  constructor(
-    public navCtrl: NavController,
-    public navParams: NavParams,
-    public dragula: DragulaService,
-    public toastCrtl: ToastController,
-    public util: UtilProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public dragula: DragulaService, public toastCrtl: ToastController,
+    public cartService: CartService, public util: UtilProvider) {
     this.imgOrder = this.IMG_DEFAULT;
     this.order = new Order("custom");
     dragula.destroy("COPYABLE");
@@ -175,12 +173,17 @@ export class BuildOrderPage {
     });
   }
 
-  btnFinishOrder() {
-    console.log("FINISH");
-    console.log(JSON.stringify(this.order));
+  btnFinishOrder(produto: ProdutoDTO) {
+    // console.log(this.imgOrder);
     if (this.order.itens !== null && this.order.itens.length !== 0) {
       // this.navCtrl.push("WaitOrderPage", { order: this.order });
-      this.navCtrl.push("ProdutosPage", {order: this.order});
+      var produtourl = this.imgOrder;
+      produto = this.order.itens;
+      produto.src = this.imgOrder;
+      this.cartService.addPizza(produto);
+      this.navCtrl.push("ProdutosPage", { order: this.order });
+    } else {
+      this.util.showToast("PEDIDO VAZIO!!!!!!!!!!!!!!!!!!!!!!!!!!");
     }
   }
 

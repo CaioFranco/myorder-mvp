@@ -4,6 +4,7 @@ import { CartItem } from '../../providers/cart/cart-item';
 import { StorageService } from '../../providers/cart/storage.service';
 import { CartService } from '../../providers/cart/cart.service';
 import { ProdutoDTO } from '../../providers/produto.dto';
+import { UtilProvider } from '../../providers/util/util';
 
 @IonicPage()
 @Component({
@@ -16,14 +17,15 @@ export class CartPage {
 
   constructor(public navCtrl: NavController,
      public navParams: NavParams,
-    public cartService: CartService
+    public cartService: CartService,
+    public util: UtilProvider
    ) {
   }
 
   ionViewDidLoad() {
    let cart = this.cartService.getCart();
    this.items = cart.items;
-    console.log(cart.items);
+    console.log(cart.items)
   }
   removeItem(produto: ProdutoDTO){
     this.items = this.cartService.removeProduto(produto).items;
@@ -35,7 +37,14 @@ export class CartPage {
     this.items = this.cartService.decreaseQuantity(produto).items;
   
   }
-  total(): number{
-    return this.cartService.total();
+  // total(): number{
+  //   return this.cartService.total();
+  // }
+  btnGoBack() {
+    this.navCtrl.pop();
+  }
+
+  btnRotation() {
+    this.util.showToast("VAI GIRAR!!!");
   }
 }

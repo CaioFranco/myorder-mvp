@@ -45,43 +45,16 @@ this.cartService.addProduto(produto);
   }
 else{
   this.cartService.increaseQuantity(produto);
-  console.log(produto.quantidade);
 }
 produto.quantidade++;
-
-  // this.navCtrl.setRoot("CartPage");
 }
-
-// increaseQuantity(produto: any)
-// {
-//   produto.quantidade++;
-//   if(produto.quantidade == 0)
-//   {
-//     this.cartService.addProduto(produto);
-//   }
-//   else{
-//     this.cartService.increaseQuantity(produto.quantidade);
-//   }
-// console.log(produto.quantidade);
-// console.log(this.cartService.addProduto);
-// // this.navCtrl.setRoot("CartPage");
-// }
-// decreaseQuantity(produto: any)
-// {
-//   if(produto.quantidade == 0)
-//   {
-//         produto.quantidade = 0;
-//   }
-//   else{
-//     produto.quantidade--;
-//   }
-// // this.cartService.decreaseQ(produto);
-// console.log(produto.quantidade);
-// // this.navCtrl.setRoot("CartPage");
-// }
-// // removeItem(produto: BebidaProvider){
-// //   this.item = this.cartService.removeProduto(produto).items;
-// // }
+decreaseQuantity(produto: ProdutoDTO){
+  if(produto.quantidade !== 0)
+  {
+    produto.quantidade--;
+    this.cartService.decreaseQuantity(produto).items;
+  }
+}
 
 finish(item: any)
 {
