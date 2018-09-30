@@ -1,5 +1,5 @@
 <ion-header no-border>
-  <ion-navbar transparent hideBackButton="true">
+  <ion-navbar transparent hideBackButton="true" no-border>
     <ion-title>
       <h1><b>Prepare seu pedido</b></h1>
     </ion-title>
@@ -13,20 +13,23 @@
   </ion-fab>
   <ion-fab right top small>
     <button ion-fab color="light" (click)="btnRotation()">
-      <ion-icon name="switch"></ion-icon>
+      <ion-icon class="fa-repeat"></ion-icon>
     </button>
   </ion-fab>
   <div class="wrapper">
     <ion-grid>
       <ion-row>
-        <ion-col col-2>
+        <ion-col col-3>
           <ion-scroll style="height: 600px">
             <ion-list>
               <div *ngFor="let pizza of pizzas">
+                <br>
                 <div class="center-div">
-                  <img [src]="pizza.src" (click)="selectPizza(pizza)">
+                  <img class="img-pizza" [src]="pizza.src" (click)="selectPizza(pizza)">
                 </div>
+                <br>
                 <h2 text-center><b>{{pizza.name}}</b></h2>
+                <br>
                 <br>
               </div>
             </ion-list>
@@ -34,55 +37,53 @@
         </ion-col>
         <ion-col col-3>
           <ion-scroll style="height: 600px">
-            <div class="container" dragula="COPYABLE" id="left">
-              <div *ngFor="let obj of ingredients" [id]="obj.id">
-                <div class="center-div">
-                  <img [src]="obj.src">
+            <div *ngFor="let obj of ingredients" >
+              <div class="container" dragula="COPYABLE" id="left">
+                <div class="center-div" [id]="obj.id">
+                  <img class="ingredient" [src]="obj.src">
                 </div>
-                <h3 text-center>
-                  <b>{{obj.name}} </b>
-                </h3>
               </div>
+              <h2 text-center>
+                <b>{{obj.name}} </b>
+              </h2>
             </div>
           </ion-scroll>
         </ion-col>
         <ion-col col-4>
           <div class="container center-div" dragula="COPYABLE" id="right">
-            <div>
+            <div class="center-div">
               <img [src]="imgOrder" class="img-order">
             </div>
           </div>
-          <br>
-          <br>
-          <br>
-          <br>
-          <div class="btn-finish center-div">
+          <div class="btn-group center-div">
             <button ion-button round (click)="btnCleanOrder()">
               Limpar Pedido
             </button>
-            <button ion-button round color="secondary" (click)="btnFinishOrder(pizza)">
+            <button ion-button round color="secondary" (click)="btnFinishOrder()" [disabled]="!hasItem">
               Finalizar Pedido
             </button>
           </div>
         </ion-col>
-        <ion-col col-3>
+        <ion-col col-2>
+          <br>
+          <br>
           <div class="center-div">
-            <h1>Itens Adicionados</h1>
+            <h2>Itens Adicionados</h2>
           </div>
           <ion-scroll style="height: 600px">
             <ion-list>
               <ion-item *ngFor="let item of order.itens" no-border>
-                <ion-row>
-                  <ion-thumbnail item-start>
-                    <img [src]="item.src">
-                  </ion-thumbnail>
-                  <button ion-button clear color="danger" item-end (click)="removeItem(item)">
-                    <ion-icon name="trash"></ion-icon>
-                  </button>
-                </ion-row>
-                <ion-row>
-                  <h2><b>{{item.name}}</b></h2>
-                </ion-row>
+                <!-- <ion-row> -->
+                <ion-thumbnail item-start>
+                  <img [src]="item.src">
+                </ion-thumbnail>
+                <button ion-button clear color="danger" item-end (click)="removeItem(item)">
+                  <ion-icon name="trash"></ion-icon>
+                </button>
+                <!-- </ion-row> -->
+                <!-- <ion-label>
+                  <h2><b>564654654664654654</b></h2>
+                </ion-label> -->
               </ion-item>
             </ion-list>
           </ion-scroll>

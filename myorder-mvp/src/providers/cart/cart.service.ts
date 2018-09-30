@@ -1,7 +1,6 @@
-import { Injectable } from "../../../node_modules/@angular/core";
+import { Injectable } from "@angular/core";
 import { StorageService } from "./storage.service";
 import { Cart } from "./cart";
-import { BebidaProvider } from "../bebida/bebida";
 import { ProdutoDTO } from "../produto.dto";
 
 @Injectable()
@@ -32,7 +31,7 @@ export class CartService {
             cart.items.push({ quantidade: 1, produto: produto, src:"0"});
         }
         this.storage.setCart(cart);
-        console.log(cart.items);
+        console.log(JSON.stringify(cart.items));
         return cart;
     }
     addPizza(produto: ProdutoDTO): Cart {

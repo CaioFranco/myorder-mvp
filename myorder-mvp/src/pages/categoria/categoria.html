@@ -1,5 +1,5 @@
-<ion-header no-border>
-  <ion-navbar transparent hideBackButton="true">
+<ion-header>
+  <ion-navbar transparent hideBackButton="true" no-border>
     <ion-title>
       <h1><b>Categorias</b></h1>
     </ion-title>
@@ -7,7 +7,7 @@
 </ion-header>
 <ion-content padding>
   <ion-fab left top small>
-   
+
   </ion-fab>
   <ion-fab right top small>
     <button ion-fab color="light" (click)="btnRotation()">
@@ -15,27 +15,32 @@
     </button>
   </ion-fab>
 
-<ion-content padding>
-  <ion-grid>
-    <ion-row>
+  <ion-content padding>
+    <ion-fab right top small>
+      <button ion-fab color="light" (click)="btnRotation()">
+        <ion-icon class="fa-repeat"></ion-icon>
+      </button>
+    </ion-fab>
+    <ion-grid>
+      <ion-row>
         <ion-col col-4>
           <div class="center-div group-row">
-         <img class="circle-pic" [src]="pizzaImg" (click)="personalizar()">
+            <img class="circle-pic" [src]="pizzaImg" (click)="personalizar()">
           </div>
           <h1 class="categoriastyle">Pizzas</h1>
         </ion-col>
         <ion-col col-4>
-          <div class="center-div group-row" >
-         <img class="circle-pic" [src]="refriImg" (click)="showProdutos(2)">
+          <div class="center-div group-row">
+            <img class="circle-pic" [src]="refriImg" (click)="showProdutos(2)">
           </div>
-          <h1  class="categoriastyle">Bebidas</h1>
+          <h1 class="categoriastyle">Bebidas</h1>
         </ion-col>
         <ion-col col-4>
-          <div class="center-div group-row" >
-              <img class="circle-pic" [src]="sobremesaImg" (click)="showProdutos(3)">
+          <div class="center-div group-row">
+            <img class="circle-pic" [src]="sobremesaImg" (click)="showProdutos(3)">
           </div>
-          <h1  class="categoriastyle">Sobremesas</h1>
+          <h1 class="categoriastyle">Sobremesas</h1>
         </ion-col>
-    </ion-row>
-  </ion-grid>
-</ion-content>
+      </ion-row>
+    </ion-grid>
+  </ion-content>

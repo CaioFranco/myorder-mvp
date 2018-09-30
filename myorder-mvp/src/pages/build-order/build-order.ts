@@ -22,6 +22,8 @@ export class BuildOrderPage {
 
   public order: Order;
 
+  public hasItem: boolean;
+
   public pizzas;
   public ingredients;
 
@@ -43,6 +45,7 @@ export class BuildOrderPage {
         this.util.addClass(el, "add-ingredient");
         if (target !== null && target.id !== "left") {
           var id = el.id;
+          console.log(id);
           this.presentToastAddItem(id);
           this.addItemToOrder(id);
         }
@@ -63,7 +66,11 @@ export class BuildOrderPage {
     let item = this.getIngredient(id);
     try {
       this.order.name = pizza != null ? pizza : "custom";
-      this.order.itens.push(item);
+      if (this.order.itens.find(i => i.id === item.id) == null) {
+        this.order.time = this.order.time + item.time;
+        this.order.itens.push(item);
+      }
+      this.hasItem = true;
       this.refreshOrder();
     } catch (error) {
       console.error("addItemToOrder", JSON.stringify(error));
@@ -72,9 +79,11 @@ export class BuildOrderPage {
 
   removeItem(item) {
     var index = this.order.itens.indexOf(item, 0);
-    console.log(index);
     if (index > -1) {
       this.order.itens.splice(index, 1);
+    }
+    if (this.util.empty(this.order.itens)) {
+      this.hasItem = false;
     }
     this.refreshOrder();
   }
@@ -143,10 +152,6 @@ export class BuildOrderPage {
     if (hasCalabresa && hasCebola && hasCheese && hasTomate && hasCatupiry) {
       this.imgOrder = "../../assets/imgs/pizzas/calabresa-c-t-q-cat.png";
     }
-    // 
-    // 
-
-
   }
 
   presentToastAddItem(id) {
@@ -160,21 +165,18 @@ export class BuildOrderPage {
   }
 
   selectPizza(pizza) {
-    if (this.order.name !== "custom") {
+    if (!this.util.empty(this.order.itens)) {
       this.btnCleanOrder();
-    } else if (this.order.itens != null && this.order.itens.length != 0) {
-      this.util.showToast("ta aqui!!!!!!!!!!!!!");
-      return;
     }
     pizza.ingredient.forEach(element => {
       this.addItemToOrder(element.id, pizza.name);
     });
-    console.log("PIZZA: ", JSON.stringify(pizza));
   }
 
   btnFinishOrder(produto: ProdutoDTO) {
     // console.log(this.imgOrder);
     if (this.order.itens !== null && this.order.itens.length !== 0) {
+      // this.navCtrl.push("WaitOrderPage", { order: this.order });
       var produtourl = this.imgOrder;
       produto = this.order.itens;
       produto.src = this.imgOrder;
@@ -188,6 +190,7 @@ export class BuildOrderPage {
   btnCleanOrder() {
     this.order.name = "custom";
     this.order.itens = [];
+    this.hasItem = false;
     this.refreshOrder();
   }
 
