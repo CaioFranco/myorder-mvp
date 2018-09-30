@@ -6,6 +6,8 @@ import { IngredientProvider } from "../../providers/ingredient/ingredient";
 import { PizzaProvider } from "../../providers/pizza/pizza";
 import { UtilProvider } from "../../providers/util/util";
 import { Order } from "../../model/order";
+import { ProdutoDTO } from "../../providers/produto.dto";
+import { CartService } from "../../providers/cart/cart.service";
 
 @IonicPage()
 @Component({
@@ -18,13 +20,13 @@ export class BuildOrderPage {
   public IMG_DEFAULT: string = "../../assets/imgs/pizzas/pizza.png";
   public imgOrder: string;
 
-  public order : Order;
+  public order: Order;
 
   public pizzas;
   public ingredients;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public dragula: DragulaService, public toastCrtl: ToastController,
-    public util: UtilProvider) {
+    public cartService: CartService, public util: UtilProvider) {
     this.imgOrder = this.IMG_DEFAULT;
     this.order = new Order("custom");
     dragula.destroy("COPYABLE");
@@ -88,59 +90,59 @@ export class BuildOrderPage {
     } catch (error) {
       console.error("refreshOrder:", error);
     }
-    if (!hasCheese && !hasCalabresa) { 
+    if (!hasCheese && !hasCalabresa) {
       this.imgOrder = this.IMG_DEFAULT;
     }
 
-    if (hasCheese) { 
+    if (hasCheese) {
       this.imgOrder = "../../assets/imgs/pizzas/mussarela.png"
     }
-    if (hasCheese && hasCatupiry) { 
+    if (hasCheese && hasCatupiry) {
       this.imgOrder = "../../assets/imgs/pizzas/mussarela-cat.png"
     }
-    if (hasTomate && hasCheese) { 
+    if (hasTomate && hasCheese) {
       this.imgOrder = "../../assets/imgs/pizzas/mussarela-t.png"
-    } 
-    if (hasTomate && hasCheese && hasCatupiry) { 
+    }
+    if (hasTomate && hasCheese && hasCatupiry) {
       this.imgOrder = "../../assets/imgs/pizzas/mussarela-t-c.png"
-    } 
-    if (!hasTomate && hasCheese && hasCalabresa && hasCatupiry) { 
+    }
+    if (!hasTomate && hasCheese && hasCalabresa && hasCatupiry) {
       this.imgOrder = "../../assets/imgs/pizzas/calabresa-q.png"
-    } 
-// calabresa
+    }
+    // calabresa
     if (hasCalabresa && !hasCebola && !hasCheese) {
       this.imgOrder = "../../assets/imgs/pizzas/calabresa.png";
-    }   
-    if (!hasTomate && hasCheese && hasCalabresa) { 
+    }
+    if (!hasTomate && hasCheese && hasCalabresa) {
       this.imgOrder = "../../assets/imgs/pizzas/calabresa-m.png"
-    } 
-    if (hasCalabresa && hasCebola ) { 
+    }
+    if (hasCalabresa && hasCebola) {
       this.imgOrder = "../../assets/imgs/pizzas/calabresa-c.png"
     }
-    if (hasCalabresa && hasCatupiry && !hasCebola) { 
+    if (hasCalabresa && hasCatupiry && !hasCebola) {
       this.imgOrder = "../../assets/imgs/pizzas/calabresa-cat.png"
     }
-    if (hasTomate && hasCheese && hasCalabresa) { 
+    if (hasTomate && hasCheese && hasCalabresa) {
       this.imgOrder = "../../assets/imgs/pizzas/calabresa-q-t.png"
-    } 
+    }
 
-    if (hasCalabresa && hasCatupiry && !hasCebola && hasCheese) { 
+    if (hasCalabresa && hasCatupiry && !hasCebola && hasCheese) {
       this.imgOrder = "../../assets/imgs/pizzas/calabresa-m-cat.png"
     }
 
     if (hasCalabresa && hasCebola && hasCatupiry && !hasCheese) {
       this.imgOrder = "../../assets/imgs/pizzas/calabresa-c-cat.png";
-    } 
-    if (hasCalabresa && hasCebola && hasCheese && !hasCatupiry && !hasTomate) { 
+    }
+    if (hasCalabresa && hasCebola && hasCheese && !hasCatupiry && !hasTomate) {
       this.imgOrder = "../../assets/imgs/pizzas/calabresa-c-q.png"
     }
 
     if (hasCalabresa && hasCebola && hasCheese && hasTomate && !hasCatupiry) {
       this.imgOrder = "../../assets/imgs/pizzas/calabresa-c-q-t.png";
-    } 
+    }
     if (hasCalabresa && hasCebola && hasCheese && hasTomate && hasCatupiry) {
       this.imgOrder = "../../assets/imgs/pizzas/calabresa-c-t-q-cat.png";
-    } 
+    }
     // 
     // 
 
@@ -170,11 +172,14 @@ export class BuildOrderPage {
     console.log("PIZZA: ", JSON.stringify(pizza));
   }
 
-  btnFinishOrder() {
-    console.log("FINISH");
-    console.log(JSON.stringify(this.order));
+  btnFinishOrder(produto: ProdutoDTO) {
+    // console.log(this.imgOrder);
     if (this.order.itens !== null && this.order.itens.length !== 0) {
-      this.navCtrl.push("ProdutosPage", {order: this.order});
+      var produtourl = this.imgOrder;
+      produto = this.order.itens;
+      produto.src = this.imgOrder;
+      this.cartService.addPizza(produto);
+      this.navCtrl.push("ProdutosPage", { order: this.order });
     } else {
       this.util.showToast("PEDIDO VAZIO!!!!!!!!!!!!!!!!!!!!!!!!!!");
     }

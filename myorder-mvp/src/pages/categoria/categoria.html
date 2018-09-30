@@ -1,32 +1,40 @@
-<ion-header>
+<ion-header no-border>
   <ion-navbar transparent hideBackButton="true">
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>Categorias</ion-title>
+    <ion-title>
+      <h1><b>Categorias</b></h1>
+    </ion-title>
   </ion-navbar>
 </ion-header>
+<ion-content padding>
+  <ion-fab left top small>
+   
+  </ion-fab>
+  <ion-fab right top small>
+    <button ion-fab color="light" (click)="btnRotation()">
+      <ion-icon name="switch"></ion-icon>
+    </button>
+  </ion-fab>
 
 <ion-content padding>
   <ion-grid>
     <ion-row>
         <ion-col col-4>
           <div class="center-div group-row">
-         <h1>Pizza</h1>
          <img class="circle-pic" [src]="pizzaImg" (click)="personalizar()">
           </div>
+          <h1 class="categoriastyle">Pizzas</h1>
         </ion-col>
         <ion-col col-4>
           <div class="center-div group-row" >
-         <h1>Bebidas</h1>
          <img class="circle-pic" [src]="refriImg" (click)="showProdutos(2)">
           </div>
+          <h1  class="categoriastyle">Bebidas</h1>
         </ion-col>
         <ion-col col-4>
           <div class="center-div group-row" >
-              <h1>Sobremesa</h1>
               <img class="circle-pic" [src]="sobremesaImg" (click)="showProdutos(3)">
           </div>
+          <h1  class="categoriastyle">Sobremesas</h1>
         </ion-col>
     </ion-row>
   </ion-grid>

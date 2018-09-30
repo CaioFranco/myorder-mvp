@@ -3,5 +3,25 @@ page-cart {
         float:left;
         padding-right: 10px;
     }
+
+    .cartcard{
+        background-color: #8c8c8c;
+        margin-top: 2%;
+    }
+    img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        max-height: 100px;
+    }
+    h1{
+        font-size: 3.0rem;
+        color: black;
+    }
+    ion-item{
+        border-bottom: 0px !important;
+        border-top: 0px !important;
+        background-color: transparent !important;
+    }
     }
     

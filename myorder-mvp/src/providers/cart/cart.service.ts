@@ -5,20 +5,20 @@ import { BebidaProvider } from "../bebida/bebida";
 import { ProdutoDTO } from "../produto.dto";
 
 @Injectable()
-export class CartService{
+export class CartService {
 
-    constructor(public storage: StorageService){
+    constructor(public storage: StorageService) {
     }
-    createOrClearCart() : Cart {
-let cart: Cart = {items:[]};
-this.storage.setCart(cart);
-return cart; 
+    createOrClearCart(): Cart {
+        let cart: Cart = { items: [] };
+        this.storage.setCart(cart);
+        return cart;
 
     }
 
-    getCart() : Cart {
+    getCart(): Cart {
         let cart: Cart = this.storage.getCart();
-        if(cart==null){
+        if (cart == null) {
             cart = this.createOrClearCart();
         }
         return cart;
@@ -29,17 +29,29 @@ return cart;
         let cart = this.getCart();
         let position = cart.items.findIndex(x => x.produto.id == produto.id);
         if (position == -1) {
-            cart.items.push({ quantidade: 1, produto: produto });
+            cart.items.push({ quantidade: 1, produto: produto, src:"0"});
         }
         this.storage.setCart(cart);
         console.log(cart.items);
         return cart;
     }
-    total() : number {
+    addPizza(produto: ProdutoDTO): Cart {
+        let cart = this.getCart();
+        let position = cart.items.findIndex(x => x.produto.id == produto.id);
+        if (position == -1) {
+            cart.items.push({ quantidade: 1, produto: produto, src: produto.src});
+
+        } 
+        this.storage.setCart(cart);
+        return cart;
+
+    }
+
+    total(): number {
         let cart = this.getCart();
         let sum = 0;
         console.log("totalera");
-        for (var i=0; i<cart.items.length; i++) {
+        for (var i = 0; i < cart.items.length; i++) {
             sum += cart.items[i].produto.preco * cart.items[i].quantidade;
         }
         return sum;

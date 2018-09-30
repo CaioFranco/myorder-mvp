@@ -4,4 +4,5 @@ export interface ProdutoDTO {
     quantidade: number;
     preco: number;
     imageUrl? : string;
+    src: string;
 }

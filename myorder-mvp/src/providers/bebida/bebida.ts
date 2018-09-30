@@ -13,9 +13,9 @@ export class BebidaProvider {
       quantidade: 0,
       preco: 5,
     },  {
-     id: "coca",
-    name: "Coca-Cola Zero LATA",
-    src: "../../assets/imgs/bebidas/coca.png",
+     id: "sprite",
+    name: "Sprite LATA",
+    src: "../../assets/imgs/bebidas/sprite.png",
     quantidade: 0,
     preco: 5,
    },{
@@ -25,11 +25,11 @@ export class BebidaProvider {
       quantidade: 0,
       preco: 5,},
     {
-      id: "guaranazero",
-      name: "Guarana Zero LATA",
-      src: "../../assets/imgs/bebidas/guara.png",
+      id: "coca-ks",
+      name: "Coca Cola KS",
+      src: "../../assets/imgs/bebidas/coca-ks.png",
       quantidade: 0,
-      preco: 5,
+      preco: 4,
     },{
       id: "GuaraJesus",
       name: "Guarana Jesus Lata",
