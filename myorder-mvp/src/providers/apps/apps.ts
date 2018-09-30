@@ -9,47 +9,47 @@ export class AppsProvider {
     url: "https://www.uol.com.br/"
   };
   static GLOBO = {
-    name: "Uol",
+    name: "Globo",
     src: "../../assets/imgs/apps/globo.png",
-    url: "https://www.uol.com.br/"
+    url: "https://www.globo.com/"
   };
   static TERRA = {
-    name: "Uol",
+    name: "Terra",
     src: "../../assets/imgs/apps/terra.svg",
-    url: "https://www.uol.com.br/"
+    url: "https://www.terra.com.br/"
   };
   static NYT = {
-    name: "Uol",
+    name: "New York Times",
     src: "../../assets/imgs/apps/nyt.png",
-    url: "https://www.uol.com.br/"
+    url: "https://www.nytimes.com/"
   };
   static GOOGLE = {
-    name: "Uol",
+    name: "Google",
     src: "../../assets/imgs/apps/google.svg",
-    url: "https://www.uol.com.br/"
+    url: "https://www.google.com.br/"
   };
   static FOLHA = {
-    name: "Uol",
+    name: "Folha de SP",
     src: "../../assets/imgs/apps/folha.png",
-    url: "https://www.uol.com.br/"
+    url: "https://www.folha.uol.com.br/"
   };
   static FRUIT_NINJA = {
-    name: "Uol",
+    name: "Fruit Ninja",
     src: "../../assets/imgs/apps/ninjafruit.png",
     url: "https://www.uol.com.br/"
   };
   static PLANT_ZOMBIE = {
-    name: "Uol",
+    name: "Plants vs Zombies",
     src: "../../assets/imgs/apps/plantsvszombies.png",
     url: "https://www.uol.com.br/"
   };
   static CANDY_CRUSH = {
-    name: "Uol",
+    name: "Candy Crush",
     src: "../../assets/imgs/apps/candy_crush.png",
     url: "https://www.uol.com.br/"
   };
   static FACEBOOK = {
-    name: "Uol",
+    name: "Facebook",
     src: "../../assets/imgs/apps/facebook.svg",
     url: "https://www.uol.com.br/"
   };

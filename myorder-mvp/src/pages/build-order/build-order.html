@@ -72,18 +72,13 @@
           </div>
           <ion-scroll style="height: 600px">
             <ion-list>
-              <ion-item *ngFor="let item of order.itens" no-border>
-                <!-- <ion-row> -->
+              <ion-item *ngFor="let item of order.pizzas" no-border>
                 <ion-thumbnail item-start>
                   <img [src]="item.src">
                 </ion-thumbnail>
                 <button ion-button clear color="danger" item-end (click)="removeItem(item)">
                   <ion-icon name="trash"></ion-icon>
                 </button>
-                <!-- </ion-row> -->
-                <!-- <ion-label>
-                  <h2><b>564654654664654654</b></h2>
-                </ion-label> -->
               </ion-item>
             </ion-list>
           </ion-scroll>

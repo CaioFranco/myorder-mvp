@@ -39,8 +39,8 @@ export class WaitOrderPage {
     public navParams: NavParams) {
 
     this.order = navParams.get("order");
-    this.waitTime = this.order.time;
-    // this.waitTime = 300;
+    this.waitTime = this.order.time; // comente essa linha para desenvolver e para teste
+    // this.waitTime = 300;  // descomente esse linha quando for desenvolver e pra teste
     this.Apps = appsUtil.getApps();
   }
 
@@ -56,10 +56,7 @@ export class WaitOrderPage {
     this.util.showToast("VAI GIRAR!!!");
   }
 
-  imageSelect(index) {
-    console.log("Clicou!!!", index);
-    const browser = this.inAppBrowser.create("https://www.uol.com.br/", "_self", this.optionsBrowser);
-
-    
+  imageSelect(url) {
+    const browser = this.inAppBrowser.create(url, "_self", this.optionsBrowser);
   }
 }
