@@ -12,6 +12,13 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+$fa-font-path: "../assets/fonts" !default; 
+
+@import "font-awesome"; 
+i[class^="fa-"], ion-icon[class^="fa-"] {    
+   font-family: "FontAwesome" !important;
+}
+
 .gu-mirror {
     position: fixed !important;
     margin: 0 !important;
@@ -37,7 +44,7 @@
     user-select: none !important;
 }
 
-/* added to the source element while its mirror is dragged */
+// /* added to the source element while its mirror is dragged */
 
 .gu-transit {
     opacity: 0.2;
@@ -49,7 +56,17 @@ ion-content {
     background: url("../assets/imgs/wood.jpg") no-repeat fixed center;
     background-size: cover;
 }
+ion-content .scroll-content{
+    overflow: hidden !important;
+    overflow-x: hidden !important;
+    overflow-y: hidden !important;
+}
 
+ion-scroll{
+    .scroll-content{
+        overflow-y: scroll !important;
+    }
+}
 .center-div {
     display: flex;
     align-items: center;
