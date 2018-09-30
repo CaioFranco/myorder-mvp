@@ -1,3 +1,4 @@
+import { AppsProvider } from './../../providers/apps/apps';
 import { UtilProvider } from "./../../providers/util/util";
 import { TimerComponent } from "./../../components/timer/timer";
 import { Component, ViewChild } from "@angular/core";
@@ -32,16 +33,15 @@ export class WaitOrderPage {
 
   constructor(
     private inAppBrowser: InAppBrowser,
+    public appsUtil: AppsProvider,
     public util: UtilProvider,
     public navCtrl: NavController,
     public navParams: NavParams) {
-      
+
     this.order = navParams.get("order");
     this.waitTime = this.order.time;
     // this.waitTime = 300;
-    for (let i = 0; i < 50; i++) {
-      this.Apps.push(i);
-    }
+    this.Apps = appsUtil.getApps();
   }
 
   ionViewDidLoad() {
