@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { IngredientProvider } from "../ingredient/ingredient";
 
 
 @Injectable()
@@ -8,31 +9,14 @@ export class PizzaProvider {
 
   public static getPizzas() {
     return [{
-      name: "mussarela",
+      name: "Mussarela",
       src: "../../assets/imgs/pizzas/mussarela-t.png",
-      ingredient: [{
-        id: "cheese",
-        src: "../../assets/imgs/cheese.svg",
-        name: "Mussarela"
-      },{
-        id: "tomato",
-        src: "../../assets/imgs/ingredientes/tomate.png",
-        name: "Tomate",
-      }]
+      ingredient: [IngredientProvider.MUSSARELA, IngredientProvider.calabresa]
     }, {
-      name: "calabresa",
+      name: "Calabresa",
       src: "../../assets/imgs/pizzas/calabresa-c.png",
-      ingredient: [{
-        id: "calabresa",
-        src: "../../assets/imgs/ingredientes/salami.svg",
-        name: "Calabresa",
-      },
-      {
-        id: "cebola",
-        src: "../../assets/imgs/ingredientes/cebola.png",
-        name: "Cebola",
-      }]
-    }];
-  }
+      ingredient: [IngredientProvider.calabresa, IngredientProvider.cebola, IngredientProvider.MUSSARELA]
+  }];
+}
 
 }
