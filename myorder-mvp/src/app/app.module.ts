@@ -15,7 +15,8 @@ import { UtilProvider } from "../providers/util/util";
 import { BebidaProvider } from "../providers/bebida/bebida";
 import { CartService } from "../providers/cart/cart.service";
 import { StorageService } from "../providers/cart/storage.service";
-import { AppsProvider } from '../providers/apps/apps';
+import { AppsProvider } from "../providers/apps/apps";
+import { ScreenOrientation } from "@ionic-native/screen-orientation";
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { AppsProvider } from '../providers/apps/apps';
     StatusBar,
     SplashScreen,
     InAppBrowser,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    ScreenOrientation,
+    // {provide: ErrorHandler, useClass: IonicErrorHandler},
     PizzaProvider,
     IngredientProvider,
     UtilProvider,

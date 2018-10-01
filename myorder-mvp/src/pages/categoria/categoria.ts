@@ -2,6 +2,7 @@ import { Order } from './../../model/order';
 import { Component } from "@angular/core";
 import { IonicPage, NavController, NavParams } from "ionic-angular";
 import { UtilProvider } from "../../providers/util/util";
+import { ScreenOrientation } from '@ionic-native/screen-orientation';
 
 @IonicPage()
 @Component({
@@ -17,9 +18,11 @@ export class CategoriaPage {
   sobremesaImg: string = "../../assets/imgs/sobremesa.png";
 
   constructor(
+    public screen: ScreenOrientation,
     public util: UtilProvider,
     public navCtrl: NavController,
     public navParams: NavParams) {
+
   }
 
   ionViewDidLoad() {
@@ -33,17 +36,20 @@ export class CategoriaPage {
   }
 
   showProdutos() {
-    // this.navCtrl.push("ProdutosPage", { categoria_id: categoria_id });
     this.navCtrl.push("OrderDrinksPage", { order: new Order("bebidas", "")});
 
   }
   showSobremesas() {
     this.navCtrl.push("SobremesasPage", { order: new Order("sobremesas", "")});
-
   }
   
   btnRotation() {
-    this.util.showToast("Gira!");
+    var orientation = this.screen.type;
+    if (orientation === "landscape-primary") {      
+      this.screen.lock(this.screen.ORIENTATIONS.LANDSCAPE_SECONDARY);
+    } else {
+      this.screen.lock(this.screen.ORIENTATIONS.LANDSCAPE_PRIMARY);
+    }
   }
 
 }

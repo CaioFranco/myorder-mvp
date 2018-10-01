@@ -1,9 +1,9 @@
 import { Component } from "@angular/core";
-import { IonicPage, NavController, NavParams, LoadingController } from "ionic-angular";
+import { IonicPage, NavController, NavParams } from "ionic-angular";
 import { BebidaProvider } from "../../providers/bebida/bebida";
 import { Order } from "../../model/order";
 import { UtilProvider } from "../../providers/util/util";
-import { PizzaProvider } from "../../providers/pizza/pizza";
+import { ScreenOrientation } from "@ionic-native/screen-orientation";
 
 @IonicPage()
 @Component({
@@ -19,7 +19,7 @@ export class OrderDrinksPage {
     public util: UtilProvider,
     public navCtrl: NavController,
     public navParams: NavParams,
-    public loadingCtrl: LoadingController
+    public screen: ScreenOrientation
   ) {
     this.order = navParams.get("order"); // comente essa linha para desenvolver e para teste
     // descomente esse bloco quando for desenvolver e pra teste
@@ -87,6 +87,7 @@ export class OrderDrinksPage {
     }
     console.log("ORDER", JSON.stringify(this.order, null, " "));
     // this.navCtrl.push("FinishOrderPage", { order: this.order });
+    this.order.time = this.order.time + 60;
     this.navCtrl.push("FinishOrderPage", { order: this.order });
   }
 
@@ -95,6 +96,11 @@ export class OrderDrinksPage {
   }
 
   btnRotation() {
-
+    var orientation = this.screen.type;
+    if (orientation === "landscape-primary") {      
+      this.screen.lock(this.screen.ORIENTATIONS.LANDSCAPE_SECONDARY);
+    } else {
+      this.screen.lock(this.screen.ORIENTATIONS.LANDSCAPE_PRIMARY);
+    }
   }
 }

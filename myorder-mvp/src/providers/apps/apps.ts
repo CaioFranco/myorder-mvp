@@ -36,27 +36,47 @@ export class AppsProvider {
   static FRUIT_NINJA = {
     name: "Fruit Ninja",
     src: "../../assets/imgs/apps/ninjafruit.png",
-    url: "https://www.uol.com.br/"
+    url: ""
   };
   static PLANT_ZOMBIE = {
     name: "Plants vs Zombies",
     src: "../../assets/imgs/apps/plantsvszombies.png",
-    url: "https://www.uol.com.br/"
+    url: ""
   };
   static BIG_FARM = {
     name: "Big Farm",
     src: "../../assets/imgs/apps/big-farm.png",
-    url: "https://www.mmobomb.com/link/big-farm"
-    };
-    static FACEBOOK = {
+    url: ""
+  };
+  static FACEBOOK = {
     name: "Facebook",
     src: "../../assets/imgs/apps/facebook.svg",
     url: "https://pt-br.facebook.com/login/"
-    };
+  };
+  static CANDY_CRUSH = {
+    name: "Candy Crush",
+    src: "../../assets/imgs/apps/candy_crush.png",
+    url: ""
+  };
+  static INSTAGRAM = {
+    name: "Instagram",
+    src: "../../assets/imgs/apps/instagram.png",
+    url: "https://www.instagram.com/?hl=pt-br"
+  };
+  static TWITTER = {
+    name: "Twitter",
+    src: "../../assets/imgs/apps/twitter.svg",
+    url: "https://twitter.com/?lang=pt-br"
+  };
+  static NINEGAG = {
+    name: "9gag",
+    src: "../../assets/imgs/apps/9gag.svg",
+    url: "https://9gag.com/"
+  };
 
   constructor() { }
 
-  getApps(){
+  getApps() {
     return [
       AppsProvider.UOL,
       AppsProvider.GLOBO,
@@ -67,7 +87,12 @@ export class AppsProvider {
       AppsProvider.FACEBOOK,
       AppsProvider.FRUIT_NINJA,
       AppsProvider.PLANT_ZOMBIE,
-      AppsProvider.BIG_FARM]
+      AppsProvider.BIG_FARM,
+      AppsProvider.CANDY_CRUSH,
+      AppsProvider.TWITTER,
+      AppsProvider.INSTAGRAM,
+      AppsProvider.NINEGAG,
+    ]
   }
 
 }

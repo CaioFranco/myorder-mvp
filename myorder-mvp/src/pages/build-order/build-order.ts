@@ -6,8 +6,8 @@ import { IngredientProvider } from "../../providers/ingredient/ingredient";
 import { PizzaProvider } from "../../providers/pizza/pizza";
 import { UtilProvider } from "../../providers/util/util";
 import { Order } from "../../model/order";
-import { ProdutoDTO } from "../../providers/produto.dto";
 import { CartService } from "../../providers/cart/cart.service";
+import { ScreenOrientation } from "@ionic-native/screen-orientation";
 
 @IonicPage()
 @Component({
@@ -28,7 +28,7 @@ export class BuildOrderPage {
   public ingredients;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public dragula: DragulaService, public toastCrtl: ToastController,
-    public cartService: CartService, public util: UtilProvider) {
+    public cartService: CartService, public util: UtilProvider, public screen: ScreenOrientation) {
     this.imgOrder = this.IMG_DEFAULT;
     this.order = new Order("custom", "src");
     dragula.destroy("COPYABLE");
@@ -192,6 +192,11 @@ export class BuildOrderPage {
   }
 
   btnRotation() {
-    this.util.showToast("VAI GIRAR!!!");
+    var orientation = this.screen.type;
+    if (orientation === "landscape-primary") {      
+      this.screen.lock(this.screen.ORIENTATIONS.LANDSCAPE_SECONDARY);
+    } else {
+      this.screen.lock(this.screen.ORIENTATIONS.LANDSCAPE_PRIMARY);
+    }
   }
 }

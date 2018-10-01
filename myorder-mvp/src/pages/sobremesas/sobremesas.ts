@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-an
 import { UtilProvider } from '../../providers/util/util';
 import { SobremesaProvider } from '../../providers/sobremesa/sobremesa';
 import { Order } from '../../model/order';
+import { ScreenOrientation } from '@ionic-native/screen-orientation';
 
 @IonicPage()
 @Component({
@@ -16,6 +17,7 @@ public order: Order;
 
   constructor(
     public util: UtilProvider,
+    public screen: ScreenOrientation,
     public navCtrl: NavController,
     public navParams: NavParams,
     public loadingCtrl: LoadingController) {
@@ -66,27 +68,13 @@ public order: Order;
       }
     }
   }
-  // refreshDrink() {
-  //   if (!this.util.empty(this.order.drinks)) {
-  //     try {
-  //       this.order.drinks.forEach(bebida => {
-  //         var id = bebida.id
-  //         var qtd = 0
-  //         for (let index = 0; index < this.order.drinks.length; index++) {
-  //           const drink = this.order.drinks[index];
-  //           if (id === drink.id) {
-  //             qtd = qtd + 1;
-  //           }
-  //         }
-  //         bebida.quantidade = qtd;
-  //       });
-  //     } catch (error) {
-  //       console.error("refreshDrink", error);
-  //     }
-  //   }
-  // }
 
-  // finish() {
-  //   this.navCtrl.push("WaitOrderPage");
-  // }
+  btnRotation() {
+    var orientation = this.screen.type;
+    if (orientation === "landscape-primary") {      
+      this.screen.lock(this.screen.ORIENTATIONS.LANDSCAPE_SECONDARY);
+    } else {
+      this.screen.lock(this.screen.ORIENTATIONS.LANDSCAPE_PRIMARY);
+    }
+  }
 }

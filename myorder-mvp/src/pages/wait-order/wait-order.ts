@@ -5,6 +5,7 @@ import { Component, ViewChild } from "@angular/core";
 import { IonicPage, NavController, NavParams } from "ionic-angular";
 import { Order } from "../../model/order";
 import { InAppBrowser, InAppBrowserOptions } from "@ionic-native/in-app-browser";
+import { ScreenOrientation } from '@ionic-native/screen-orientation';
 
 @IonicPage()
 @Component({
@@ -36,6 +37,7 @@ export class WaitOrderPage {
   constructor(
     private inAppBrowser: InAppBrowser,
     public appsUtil: AppsProvider,
+    public screen: ScreenOrientation,
     public util: UtilProvider,
     public navCtrl: NavController,
     public navParams: NavParams) {
@@ -55,10 +57,17 @@ export class WaitOrderPage {
   }
 
   btnRotation() {
-    this.util.showToast("VAI GIRAR!!!");
+    var orientation = this.screen.type;
+    if (orientation === "landscape-primary") {      
+      this.screen.lock(this.screen.ORIENTATIONS.LANDSCAPE_SECONDARY);
+    } else {
+      this.screen.lock(this.screen.ORIENTATIONS.LANDSCAPE_PRIMARY);
+    }
   }
 
   imageSelect(url) {
-    this.inAppBrowser.create(url, "_blank", this.optionsBrowser);
+    if (!this.util.empty(url)) {
+      this.inAppBrowser.create(url, "_blank", this.optionsBrowser);
+    }
   }
 }

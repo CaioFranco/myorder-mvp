@@ -2,8 +2,7 @@ import { Component } from "@angular/core";
 import { IonicPage, NavController, NavParams } from "ionic-angular";
 import { UtilProvider } from "../../providers/util/util";
 import { Order } from "../../model/order";
-import { PizzaProvider } from "../../providers/pizza/pizza";
-import { BebidaProvider } from "../../providers/bebida/bebida";
+import { ScreenOrientation } from "@ionic-native/screen-orientation";
 
 @IonicPage()
 @Component({
@@ -19,6 +18,7 @@ export class FinishOrderPage {
   public pizzas;
 
   constructor(public navCtrl: NavController,
+    public screen: ScreenOrientation,
     public navParams: NavParams,
     public util: UtilProvider
   ) {
@@ -57,7 +57,12 @@ export class FinishOrderPage {
     this.navCtrl.push("WaitOrderPage", { order: this.order });
   }
   btnRotation() {
-    this.util.showToast("VAI GIRAR!!!");
+    var orientation = this.screen.type;
+    if (orientation === "landscape-primary") {      
+      this.screen.lock(this.screen.ORIENTATIONS.LANDSCAPE_SECONDARY);
+    } else {
+      this.screen.lock(this.screen.ORIENTATIONS.LANDSCAPE_PRIMARY);
+    }
   }
 
 }
