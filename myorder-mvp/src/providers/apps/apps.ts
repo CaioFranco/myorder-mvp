@@ -43,16 +43,16 @@ export class AppsProvider {
     src: "../../assets/imgs/apps/plantsvszombies.png",
     url: "https://www.uol.com.br/"
   };
-  static CANDY_CRUSH = {
-    name: "Candy Crush",
-    src: "../../assets/imgs/apps/candy_crush.png",
-    url: "https://www.uol.com.br/"
-  };
-  static FACEBOOK = {
+  static BIG_FARM = {
+    name: "Big Farm",
+    src: "…/…/assets/imgs/apps/big-farm.png",
+    url: "https://www.mmobomb.com/link/big-farm"
+    };
+    static FACEBOOK = {
     name: "Facebook",
-    src: "../../assets/imgs/apps/facebook.svg",
-    url: "https://www.uol.com.br/"
-  };
+    src: "…/…/assets/imgs/apps/facebook.svg",
+    url: "https://pt-br.facebook.com/login/"
+    };
 
   constructor() { }
 
@@ -62,11 +62,12 @@ export class AppsProvider {
       AppsProvider.GLOBO,
       AppsProvider.TERRA,
       AppsProvider.FOLHA,
+      AppsProvider.NYT,
       AppsProvider.GOOGLE,
       AppsProvider.FACEBOOK,
       AppsProvider.FRUIT_NINJA,
       AppsProvider.PLANT_ZOMBIE,
-      AppsProvider.CANDY_CRUSH]
+      AppsProvider.BIG_FARM]
   }
 
 }

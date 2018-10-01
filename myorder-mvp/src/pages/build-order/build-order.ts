@@ -46,7 +46,7 @@ export class BuildOrderPage {
         if (target !== null && target.id !== "left") {
           var id = el.id;
           console.log(id);
-          this.presentToastAddItem(id);
+          //this.presentToastAddItem(id);
           this.addItemToOrder(id);
         }
       })
@@ -157,8 +157,8 @@ export class BuildOrderPage {
   presentToastAddItem(id) {
     var i = this.getIngredient(id);
     const toast = this.toastCrtl.create({
-      message: `${i.name} was added successfully`,
-      duration: 3000,
+      message: `${i.name} foi adicionada`,
+      duration: 1500,
       position: "middle"
     });
     toast.present();

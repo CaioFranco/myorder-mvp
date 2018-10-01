@@ -32,8 +32,10 @@ page-build-order {
 }
 
 .img-order{
-    position: absolute;
-    bottom: 40%;
+    // position: absolute;
+    // bottom: 40%;
+    position: relative;
+    top: 160px;
     transform: scale(1.5);
 }
 
