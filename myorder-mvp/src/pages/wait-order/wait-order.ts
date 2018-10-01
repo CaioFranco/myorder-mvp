@@ -22,13 +22,15 @@ export class WaitOrderPage {
   public Apps: any[] = [];
   public optionsBrowser: InAppBrowserOptions = {
     mediaPlaybackRequiresUserAction: "no",
-    hideurlbar: "no",
+    location: "no",
+    hideurlbar: "yes",
     toolbar: "yes",
-    closebuttoncaption : "Close", //iOS only
-    disallowoverscroll : "no", //iOS only 
-    enableViewportScale : "no", //iOS only 
-    allowInlineMediaPlayback : "no",//iOS only 
-    presentationstyle : "pagesheet",//iOS only 
+    closebuttoncaption: "Fechar", //iOS only
+    disallowoverscroll: "no", //iOS only
+    enableViewportScale: "no", //iOS only
+    allowInlineMediaPlayback: "no",//iOS only
+    presentationstyle: "pagesheet",//iOS only
+    toolbarposition: "top",
   };
 
   constructor(
@@ -44,7 +46,7 @@ export class WaitOrderPage {
     this.Apps = appsUtil.getApps();
   }
 
-  ionViewDidLoad() {
+  ionViewDidEnter() {
     this.timer.startTimer(this.waitTime);
   }
 
@@ -57,6 +59,6 @@ export class WaitOrderPage {
   }
 
   imageSelect(url) {
-    const browser = this.inAppBrowser.create(url, "_self", this.optionsBrowser);
+    this.inAppBrowser.create(url, "_blank", this.optionsBrowser);
   }
 }
