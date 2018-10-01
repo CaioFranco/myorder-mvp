@@ -1,4 +1,4 @@
-<ion-header >
+<ion-header>
   <ion-navbar transparent hideBackButton="true" no-border>
     <ion-title>
       <h1><b>Confirmar pedido</b></h1>
@@ -6,53 +6,53 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding>
-    <ion-fab left top small>
-        <button ion-fab color="light" (click)="btnGoBack()">
-          <ion-icon name="arrow-round-back"></ion-icon>
-        </button>
-      </ion-fab>
-      <ion-fab right top small>
+  <ion-fab left top small>
+    <button ion-fab color="light" (click)="btnGoBack()">
+      <ion-icon name="arrow-round-back"></ion-icon>
+    </button>
+  </ion-fab>
+  <!-- <ion-fab right top small>
         <button ion-fab color="light" (click)="btnRotation()">
           <ion-icon class="fa-repeat"></ion-icon>
         </button>
-      </ion-fab>
-      <div class="row" style="margin-top: 15px">
+      </ion-fab> -->
+  <div class="row" style="margin-top: 15px">
     <ion-grid>
-        <ion-row>
-                  <ion-col col-5>
-            <ion-scroll style="height: 600px">
-    <h1 style="text-align: center;">Pizzas</h1>
-        <img class="imgPizza" [src]="this.order.pizzasrc">
-        <h3>Ingredientes: </h3>
-        <ion-grid>
-            <ion-col col-4>
+      <ion-row>
+        <ion-col col-5>
+          <ion-scroll style="height: 600px">
+            <h1 style="text-align: center;">Pizzas</h1>
+            <img class="imgPizza" [src]="this.order.pizzasrc">
+            <h3>Ingredientes: </h3>
+            <ion-grid>
+              <ion-col col-4>
                 <ion-list *ngFor="let pizza of pizzas">
-        <h4>{{pizza.name}} </h4>
-</ion-list>  
-</ion-col>
-</ion-grid>
-</ion-scroll>
-</ion-col>
+                  <h4>{{pizza.name}} </h4>
+                </ion-list>
+              </ion-col>
+            </ion-grid>
+          </ion-scroll>
+        </ion-col>
 
-<ion-col col-7>
+        <ion-col col-7>
 
-    <ion-scroll style="height: 600px">
-<h1 style="text-align: center;">Bebidas</h1>
-<ion-grid>
-  <ion-row  >
-    <ion-col class="dCard" col-6 *ngFor="let drink of drinks">  
-  <img class="imgbebida" [src]="drink.src">
-    <h4>{{drink.quantidade}} {{drink.name}}</h4>
-    <!-- <h5 class="imagetext">{{drink.quantidade}}</h5> -->
-  </ion-col>
-</ion-row>
-</ion-grid>
-</ion-scroll>
-</ion-col>
-</ion-row>
-</ion-grid>
-</div>
-<div col-12 style="text-align: center; position: absolute; bottom: 20px;">
-    <button ion-button round color="secondary"(click)="finish()">Confirmar Pedido</button>
+          <ion-scroll style="height: 600px">
+            <h1 style="text-align: center;">Bebidas</h1>
+            <ion-grid>
+              <ion-row>
+                <ion-col class="dCard" col-6 *ngFor="let drink of drinks">
+                  <img class="imgbebida" [src]="drink.src">
+                  <h4>{{drink.quantidade}} {{drink.name}}</h4>
+                  <!-- <h5 class="imagetext">{{drink.quantidade}}</h5> -->
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-scroll>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+  <div col-12 style="text-align: center; position: absolute; bottom: 20px;">
+    <button ion-button round color="secondary" (click)="finish()">Confirmar Pedido</button>
   </div>
 </ion-content>

@@ -58,7 +58,7 @@ export class FinishOrderPage {
   }
   btnRotation() {
     var orientation = this.screen.type;
-    if (orientation === "landscape-primary") {      
+    if (orientation == "landscape-primary") {      
       this.screen.lock(this.screen.ORIENTATIONS.LANDSCAPE_SECONDARY);
     } else {
       this.screen.lock(this.screen.ORIENTATIONS.LANDSCAPE_PRIMARY);

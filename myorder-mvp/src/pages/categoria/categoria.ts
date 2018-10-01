@@ -45,7 +45,8 @@ export class CategoriaPage {
   
   btnRotation() {
     var orientation = this.screen.type;
-    if (orientation === "landscape-primary") {      
+    // this.util.showToast(orientation);
+    if (orientation == "landscape-primary") {      
       this.screen.lock(this.screen.ORIENTATIONS.LANDSCAPE_SECONDARY);
     } else {
       this.screen.lock(this.screen.ORIENTATIONS.LANDSCAPE_PRIMARY);
