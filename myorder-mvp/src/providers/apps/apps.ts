@@ -45,12 +45,12 @@ export class AppsProvider {
   };
   static BIG_FARM = {
     name: "Big Farm",
-    src: "…/…/assets/imgs/apps/big-farm.png",
+    src: "../../assets/imgs/apps/big-farm.png",
     url: "https://www.mmobomb.com/link/big-farm"
     };
     static FACEBOOK = {
     name: "Facebook",
-    src: "…/…/assets/imgs/apps/facebook.svg",
+    src: "../../assets/imgs/apps/facebook.svg",
     url: "https://pt-br.facebook.com/login/"
     };
 
