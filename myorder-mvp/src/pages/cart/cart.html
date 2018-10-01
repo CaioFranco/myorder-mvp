@@ -22,7 +22,7 @@
         <ion-thumbnail item-start>
           <img [src] = "item.src">
         </ion-thumbnail>
-        <!-- <h2>{{item.produto.nome}}</h2> -->
+        <h2> Pizza personalizada</h2>
         <!-- <p>R{{item.produto.preco | currency}}</p> -->
         <ion-icon name="remove-circle" class="nolinebreak" color="primary" (click)="decreaseQuantity(item.produto)"></ion-icon>
         <p class="nolinebreak">{{item.quantidade}}</p>
@@ -33,7 +33,7 @@
           <ion-thumbnail item-start>
             <img [src] = "item.produto.src">
           </ion-thumbnail>
-          <h2>{{item.produto.nome}}</h2>
+          <h2>{{item.produto.name}}</h2>
           <!-- <p>R{{item.produto.preco | currency}}</p> -->
           <ion-icon name="remove-circle" class="nolinebreak" color="primary" (click)="decreaseQuantity(item.produto)"></ion-icon>
           <p class="nolinebreak">{{item.quantidade}}</p>
