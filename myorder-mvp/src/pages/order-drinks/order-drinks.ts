@@ -26,6 +26,7 @@ export class OrderDrinksPage {
     // this.order = new Order("teste");
     // this.order.time = 100;
     // this.order.pizzas = PizzaProvider.getPizzas()[0];
+    console.log(Order);
   }
 
   ionViewDidLoad() {
@@ -86,7 +87,7 @@ export class OrderDrinksPage {
     }
     console.log("ORDER", JSON.stringify(this.order, null, " "));
     // this.navCtrl.push("FinishOrderPage", { order: this.order });
-    this.navCtrl.push("WaitOrderPage", { order: this.order });
+    this.navCtrl.push("FinishOrderPage", { order: this.order });
   }
 
   btnGoBack() {

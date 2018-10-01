@@ -34,11 +34,11 @@ export class CategoriaPage {
 
   showProdutos() {
     // this.navCtrl.push("ProdutosPage", { categoria_id: categoria_id });
-    this.navCtrl.push("OrderDrinksPage", { order: new Order("bebidas") });
+    this.navCtrl.push("OrderDrinksPage", { order: new Order("bebidas", "")});
 
   }
   showSobremesas() {
-    this.navCtrl.push("SobremesasPage", { order: new Order("sobremesas") });
+    this.navCtrl.push("SobremesasPage", { order: new Order("sobremesas", "")});
 
   }
   

@@ -30,7 +30,7 @@ export class BuildOrderPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public dragula: DragulaService, public toastCrtl: ToastController,
     public cartService: CartService, public util: UtilProvider) {
     this.imgOrder = this.IMG_DEFAULT;
-    this.order = new Order("custom");
+    this.order = new Order("custom", "src");
     dragula.destroy("COPYABLE");
     dragula.createGroup("COPYABLE", {
       copy: (el, source) => {
@@ -175,6 +175,7 @@ export class BuildOrderPage {
 
   btnFinishOrder() {
     if (this.order.pizzas !== null && this.order.pizzas.length !== 0) {
+     this.order.pizzasrc = this.imgOrder;
       this.navCtrl.push("OrderDrinksPage", { order: this.order });
     } 
   }

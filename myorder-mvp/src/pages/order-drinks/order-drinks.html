@@ -23,14 +23,13 @@
         <!-- </ion-thumbnail> -->
         <h2 style="text-align: center;">{{bebida.name}}</h2>
         <h2 *ngIf="bebida.quantidade>0" class="nolinebreak" style="text-align: center; color: whitesmoke">{{bebida.quantidade}}</h2>
+        <ion-icon name="add-circle"  style="margin-right: -50px !important;" item-start (click)="addToOrder(bebida)" color="primary"></ion-icon>
         <ion-icon name="remove-circle" item-end (click)="decreaseQuantity(bebida)" color="danger"></ion-icon>
-        <ion-icon name="add-circle" item-start (click)="addToOrder(bebida)" color="primary"></ion-icon>
-        <!-- <ion-icon name="add-circle" item-start (click)="increaseQuantity(bebida)" color="primary" ></ion-icon> -->
         <!-- <h2> R$ {{item.preco}}</h2> -->
       </ion-list>
       <br>
     </div>
-    <div style="text-align: center;">
+    <div col-12 style="text-align: center; position: absolute; bottom: 20px;">
       <button ion-button round color="secondary"(click)="finish()">Finalizar Pedido</button>
     </div>
     <!-- </ion-content> -->
