@@ -37,7 +37,11 @@ export class CategoriaPage {
     this.navCtrl.push("OrderDrinksPage", { order: new Order("bebidas") });
 
   }
+  showSobremesas() {
+    this.navCtrl.push("SobremesasPage", { order: new Order("sobremesas") });
 
+  }
+  
   btnRotation() {
     this.util.showToast("Gira!");
   }
