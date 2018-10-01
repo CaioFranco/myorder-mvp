@@ -11,11 +11,11 @@ export class PizzaProvider {
     return [{
       name: "Mussarela",
       src: "../../assets/imgs/pizzas/mussarela-t.png",
-      ingredient: [IngredientProvider.MUSSARELA, IngredientProvider.calabresa]
+      ingredient: [IngredientProvider.MUSSARELA, IngredientProvider.tomato]
     }, {
       name: "Calabresa",
       src: "../../assets/imgs/pizzas/calabresa-c.png",
-      ingredient: [IngredientProvider.calabresa, IngredientProvider.cebola, IngredientProvider.MUSSARELA]
+      ingredient: [IngredientProvider.calabresa, IngredientProvider.cebola]
   }];
 }
 
