@@ -24,8 +24,8 @@
   <div class="div-slide">
     <ion-slides class="image-slider" slidesPerView="5" loop="true">
       <ion-slide *ngFor="let i of Apps">
-        <img src="../../assets/imgs/apps/uol.svg" class="thumb-img" #myImage (click)="imageSelect(i)"/>
-        <h2><b>App</b></h2>
+        <img [src]="i.src" class="thumb-img" #myImage (click)="imageSelect(i.url)"/>
+        <h2><b>{{i.name}}</b></h2>
       </ion-slide>
     </ion-slides>
   </div>

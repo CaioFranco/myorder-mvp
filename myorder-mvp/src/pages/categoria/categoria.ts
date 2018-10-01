@@ -1,3 +1,4 @@
+import { Order } from './../../model/order';
 import { Component } from "@angular/core";
 import { IonicPage, NavController, NavParams } from "ionic-angular";
 import { UtilProvider } from "../../providers/util/util";
@@ -27,12 +28,14 @@ export class CategoriaPage {
     this.items.push(this.sobremesaImg);
   }
 
-  personalizar(categoria_id: string) {
-    this.navCtrl.push("BuildOrderPage", { categoria_id: categoria_id });
+  personalizar() {
+    this.navCtrl.push("BuildOrderPage");
   }
 
-  showProdutos(categoria_id: string) {
-    this.navCtrl.push("ProdutosPage", { categoria_id: categoria_id });
+  showProdutos() {
+    // this.navCtrl.push("ProdutosPage", { categoria_id: categoria_id });
+    this.navCtrl.push("OrderDrinksPage", { order: new Order("bebidas") });
+
   }
 
   btnRotation() {

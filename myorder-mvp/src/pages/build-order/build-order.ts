@@ -66,9 +66,9 @@ export class BuildOrderPage {
     let item = this.getIngredient(id);
     try {
       this.order.name = pizza != null ? pizza : "custom";
-      if (this.order.itens.find(i => i.id === item.id) == null) {
+      if (this.order.pizzas.find(i => i.id === item.id) == null) {
         this.order.time = this.order.time + item.time;
-        this.order.itens.push(item);
+        this.order.pizzas.push(item);
       }
       this.hasItem = true;
       this.refreshOrder();
@@ -78,18 +78,18 @@ export class BuildOrderPage {
   }
 
   removeItem(item) {
-    var index = this.order.itens.indexOf(item, 0);
+    var index = this.order.pizzas.indexOf(item, 0);
     if (index > -1) {
-      this.order.itens.splice(index, 1);
+      this.order.pizzas.splice(index, 1);
     }
-    if (this.util.empty(this.order.itens)) {
+    if (this.util.empty(this.order.pizzas)) {
       this.hasItem = false;
     }
     this.refreshOrder();
   }
 
   refreshOrder() {
-    let ingredients = this.order.itens;
+    let ingredients = this.order.pizzas;
     try {
       var hasCheese: boolean = ingredients.find(i => i.id === "cheese") != null;
       var hasTomate: boolean = ingredients.find(i => i.id === "tomato") != null;
@@ -165,7 +165,7 @@ export class BuildOrderPage {
   }
 
   selectPizza(pizza) {
-    if (!this.util.empty(this.order.itens)) {
+    if (!this.util.empty(this.order.pizzas)) {
       this.btnCleanOrder();
     }
     pizza.ingredient.forEach(element => {
@@ -173,23 +173,15 @@ export class BuildOrderPage {
     });
   }
 
-  btnFinishOrder(produto: ProdutoDTO) {
-    // console.log(this.imgOrder);
-    if (this.order.itens !== null && this.order.itens.length !== 0) {
-      // this.navCtrl.push("WaitOrderPage", { order: this.order });
-      var produtourl = this.imgOrder;
-      produto = this.order.itens;
-      produto.src = this.imgOrder;
-      this.cartService.addPizza(produto);
-      this.navCtrl.push("ProdutosPage", { order: this.order });
-    } else {
-      this.util.showToast("PEDIDO VAZIO!!!!!!!!!!!!!!!!!!!!!!!!!!");
-    }
+  btnFinishOrder() {
+    if (this.order.pizzas !== null && this.order.pizzas.length !== 0) {
+      this.navCtrl.push("OrderDrinksPage", { order: this.order });
+    } 
   }
 
   btnCleanOrder() {
     this.order.name = "custom";
-    this.order.itens = [];
+    this.order.pizzas = [];
     this.hasItem = false;
     this.refreshOrder();
   }

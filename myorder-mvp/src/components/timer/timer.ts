@@ -45,8 +45,12 @@ export class TimerComponent {
     this.timer.hasStarted = true;
     this.timer.runTimer = true;
     if (time !== 0) {
-      this.timer.secondsRemaining = this.util.getCurrentTime() + time;
     }
+    console.log("getCurrentTime",this.util.getCurrentTime() );
+    console.log("secondsRemaining",this.timer.secondsRemaining );
+    console.log("time",time);
+    
+    this.timer.secondsRemaining = this.util.getCurrentTime() + time;
     this.timerTick();
   }
 
