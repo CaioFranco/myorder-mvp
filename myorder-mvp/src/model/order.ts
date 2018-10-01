@@ -4,15 +4,15 @@ import { Injectable } from "@angular/core";
 export class Order implements OrderImpl{
 
     public name;
-    public itens;
+    public pizzas;
     public drinks;
-    public sobremesa;
+    public time;
 
     constructor(name){
         this.name = name;
-        this.itens = [];
+        this.pizzas = [];
         this.drinks = [];
-        this.sobremesa = [];
+        this.time = 0;
     }
 
 }
@@ -20,8 +20,7 @@ export class Order implements OrderImpl{
 export interface OrderImpl {
 
     name: string;
-    itens: any[];
+    pizzas: any[];
     drinks: any[];
-    sobremesa: any[];
-
+    time: number;
 }

@@ -1,0 +1,50 @@
+<ion-header no-border>
+  <ion-navbar transparent hideBackButton="true">
+    <ion-title>
+      <h1><b>Confirmar pedido</b></h1>
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <ion-fab left top small>
+    <button ion-fab color="light" (click)="btnGoBack()">
+      <ion-icon name="arrow-round-back"></ion-icon>
+    </button>
+  </ion-fab>
+  <ion-fab right top small>
+    <button ion-fab color="light" (click)="btnRotation()">
+      <ion-icon name="switch"></ion-icon>
+    </button>
+  </ion-fab>
+  <ion-content padding>
+    <ion-list *ngFor= "let item of items"  >
+      <ion-item class="cartcard" *ngIf="item.src !== '0'">
+        <ion-thumbnail item-start>
+          <img [src] = "item.src">
+        </ion-thumbnail>
+        <!-- <h2>{{item.produto.nome}}</h2> -->
+        <!-- <p>R{{item.produto.preco | currency}}</p> -->
+        <ion-icon name="remove-circle" class="nolinebreak" color="primary" (click)="decreaseQuantity(item.produto)"></ion-icon>
+        <p class="nolinebreak">{{item.quantidade}}</p>
+        <ion-icon name="add-circle" (click)="increaseQuantity(item.produto)" color="primary"></ion-icon>
+        <ion-icon name="trash" item-end color="danger" (click)="removeItem(item.produto)"></ion-icon>
+      </ion-item> 
+      <ion-item class="cartcard" *ngIf="item.src === '0'">
+          <ion-thumbnail item-start>
+            <img [src] = "item.produto.src">
+          </ion-thumbnail>
+          <h2>{{item.produto.nome}}</h2>
+          <!-- <p>R{{item.produto.preco | currency}}</p> -->
+          <ion-icon name="remove-circle" class="nolinebreak" color="primary" (click)="decreaseQuantity(item.produto)"></ion-icon>
+          <p class="nolinebreak">{{item.quantidade}}</p>
+          <ion-icon name="add-circle" (click)="increaseQuantity(item.produto)" color="primary"></ion-icon>
+          <ion-icon name="trash" item-end color="danger" (click)="removeItem(item.produto)"></ion-icon>
+        </ion-item> 
+      <!-- <ion-item *ngIf="total() >0">
+        <h1>Total</h1>
+        <h1 item-end>{{total()}}</h1>
+      </ion-item> -->
+
+    </ion-list>
+    <button ion-button block (click)= "goOn()"> Confirmar</button>
+    </ion-content>

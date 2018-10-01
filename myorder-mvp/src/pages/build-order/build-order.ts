@@ -6,6 +6,8 @@ import { IngredientProvider } from "../../providers/ingredient/ingredient";
 import { PizzaProvider } from "../../providers/pizza/pizza";
 import { UtilProvider } from "../../providers/util/util";
 import { Order } from "../../model/order";
+import { ProdutoDTO } from "../../providers/produto.dto";
+import { CartService } from "../../providers/cart/cart.service";
 
 @IonicPage()
 @Component({
@@ -18,13 +20,15 @@ export class BuildOrderPage {
   public IMG_DEFAULT: string = "../../assets/imgs/pizzas/pizza.png";
   public imgOrder: string;
 
-  public order : Order;
+  public order: Order;
+
+  public hasItem: boolean;
 
   public pizzas;
   public ingredients;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public dragula: DragulaService, public toastCrtl: ToastController,
-    public util: UtilProvider) {
+    public cartService: CartService, public util: UtilProvider) {
     this.imgOrder = this.IMG_DEFAULT;
     this.order = new Order("custom");
     dragula.destroy("COPYABLE");
@@ -41,6 +45,7 @@ export class BuildOrderPage {
         this.util.addClass(el, "add-ingredient");
         if (target !== null && target.id !== "left") {
           var id = el.id;
+          console.log(id);
           this.presentToastAddItem(id);
           this.addItemToOrder(id);
         }
@@ -61,7 +66,11 @@ export class BuildOrderPage {
     let item = this.getIngredient(id);
     try {
       this.order.name = pizza != null ? pizza : "custom";
-      this.order.itens.push(item);
+      if (this.order.pizzas.find(i => i.id === item.id) == null) {
+        this.order.time = this.order.time + item.time;
+        this.order.pizzas.push(item);
+      }
+      this.hasItem = true;
       this.refreshOrder();
     } catch (error) {
       console.error("addItemToOrder", JSON.stringify(error));
@@ -69,16 +78,18 @@ export class BuildOrderPage {
   }
 
   removeItem(item) {
-    var index = this.order.itens.indexOf(item, 0);
-    console.log(index);
+    var index = this.order.pizzas.indexOf(item, 0);
     if (index > -1) {
-      this.order.itens.splice(index, 1);
+      this.order.pizzas.splice(index, 1);
+    }
+    if (this.util.empty(this.order.pizzas)) {
+      this.hasItem = false;
     }
     this.refreshOrder();
   }
 
   refreshOrder() {
-    let ingredients = this.order.itens;
+    let ingredients = this.order.pizzas;
     try {
       var hasCheese: boolean = ingredients.find(i => i.id === "cheese") != null;
       var hasTomate: boolean = ingredients.find(i => i.id === "tomato") != null;
@@ -88,63 +99,59 @@ export class BuildOrderPage {
     } catch (error) {
       console.error("refreshOrder:", error);
     }
-    if (!hasCheese && !hasCalabresa) { 
+    if (!hasCheese && !hasCalabresa) {
       this.imgOrder = this.IMG_DEFAULT;
     }
 
-    if (hasCheese) { 
+    if (hasCheese) {
       this.imgOrder = "../../assets/imgs/pizzas/mussarela.png"
     }
-    if (hasCheese && hasCatupiry) { 
+    if (hasCheese && hasCatupiry) {
       this.imgOrder = "../../assets/imgs/pizzas/mussarela-cat.png"
     }
-    if (hasTomate && hasCheese) { 
+    if (hasTomate && hasCheese) {
       this.imgOrder = "../../assets/imgs/pizzas/mussarela-t.png"
-    } 
-    if (hasTomate && hasCheese && hasCatupiry) { 
+    }
+    if (hasTomate && hasCheese && hasCatupiry) {
       this.imgOrder = "../../assets/imgs/pizzas/mussarela-t-c.png"
-    } 
-    if (!hasTomate && hasCheese && hasCalabresa && hasCatupiry) { 
+    }
+    if (!hasTomate && hasCheese && hasCalabresa && hasCatupiry) {
       this.imgOrder = "../../assets/imgs/pizzas/calabresa-q.png"
-    } 
-// calabresa
+    }
+    // calabresa
     if (hasCalabresa && !hasCebola && !hasCheese) {
       this.imgOrder = "../../assets/imgs/pizzas/calabresa.png";
-    }   
-    if (!hasTomate && hasCheese && hasCalabresa) { 
+    }
+    if (!hasTomate && hasCheese && hasCalabresa) {
       this.imgOrder = "../../assets/imgs/pizzas/calabresa-m.png"
-    } 
-    if (hasCalabresa && hasCebola ) { 
+    }
+    if (hasCalabresa && hasCebola) {
       this.imgOrder = "../../assets/imgs/pizzas/calabresa-c.png"
     }
-    if (hasCalabresa && hasCatupiry && !hasCebola) { 
+    if (hasCalabresa && hasCatupiry && !hasCebola) {
       this.imgOrder = "../../assets/imgs/pizzas/calabresa-cat.png"
     }
-    if (hasTomate && hasCheese && hasCalabresa) { 
+    if (hasTomate && hasCheese && hasCalabresa) {
       this.imgOrder = "../../assets/imgs/pizzas/calabresa-q-t.png"
-    } 
+    }
 
-    if (hasCalabresa && hasCatupiry && !hasCebola && hasCheese) { 
+    if (hasCalabresa && hasCatupiry && !hasCebola && hasCheese) {
       this.imgOrder = "../../assets/imgs/pizzas/calabresa-m-cat.png"
     }
 
     if (hasCalabresa && hasCebola && hasCatupiry && !hasCheese) {
       this.imgOrder = "../../assets/imgs/pizzas/calabresa-c-cat.png";
-    } 
-    if (hasCalabresa && hasCebola && hasCheese && !hasCatupiry && !hasTomate) { 
+    }
+    if (hasCalabresa && hasCebola && hasCheese && !hasCatupiry && !hasTomate) {
       this.imgOrder = "../../assets/imgs/pizzas/calabresa-c-q.png"
     }
 
     if (hasCalabresa && hasCebola && hasCheese && hasTomate && !hasCatupiry) {
       this.imgOrder = "../../assets/imgs/pizzas/calabresa-c-q-t.png";
-    } 
+    }
     if (hasCalabresa && hasCebola && hasCheese && hasTomate && hasCatupiry) {
       this.imgOrder = "../../assets/imgs/pizzas/calabresa-c-t-q-cat.png";
-    } 
-    // 
-    // 
-
-
+    }
   }
 
   presentToastAddItem(id) {
@@ -158,31 +165,24 @@ export class BuildOrderPage {
   }
 
   selectPizza(pizza) {
-    if (this.order.name !== "custom") {
+    if (!this.util.empty(this.order.pizzas)) {
       this.btnCleanOrder();
-    } else if (this.order.itens != null && this.order.itens.length != 0) {
-      this.util.showToast("ta aqui!!!!!!!!!!!!!");
-      return;
     }
     pizza.ingredient.forEach(element => {
       this.addItemToOrder(element.id, pizza.name);
     });
-    console.log("PIZZA: ", JSON.stringify(pizza));
   }
 
   btnFinishOrder() {
-    console.log("FINISH");
-    console.log(JSON.stringify(this.order));
-    if (this.order.itens !== null && this.order.itens.length !== 0) {
-      this.navCtrl.push("FinishOrderPage", {order: this.order});
-    } else {
-      this.util.showToast("PEDIDO VAZIO!!!!!!!!!!!!!!!!!!!!!!!!!!");
-    }
+    if (this.order.pizzas !== null && this.order.pizzas.length !== 0) {
+      this.navCtrl.push("OrderDrinksPage", { order: this.order });
+    } 
   }
 
   btnCleanOrder() {
     this.order.name = "custom";
-    this.order.itens = [];
+    this.order.pizzas = [];
+    this.hasItem = false;
     this.refreshOrder();
   }
 

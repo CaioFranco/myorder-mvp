@@ -1,16 +1,30 @@
 page-home {
-    h3{
-        text-align:center;
-    }
     img{
-        width: 200px;
+        width: 30%;
         align-self: center;
-        margin: auto;
-        padding: 10px;
+        margin-left: auto;
+        margin-right: auto;
+        transform: scale(2);
         display: block;
     }
-    ion-label{
+    .homeitens{
         text-align: center;
+       padding: 10px;
+         max-width: 10%;
+        max-height: 10%;
+        border-radius: 25px;
+
+    }
+
+    .centerall{
+        text-align:center !important;
+        align-self: center !important;
+
+    }
+    .botaohome{
+        max-width: 10%;
+        max-height: 10%;
+        padding: 15px;
     }
     }
     

@@ -1,3 +1,14 @@
 page-wait-order {
+    .thumb-img {
+        padding: 25px;
+        // transform: scale(0.25) !important;
+    }
 
+    .button{
+        border-radius: 10px;
+    }
+
+    ion-slide.swiper-slide {
+        left: 50%;
+    }
 }
